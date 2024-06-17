@@ -1,8 +1,14 @@
-# React + Vite
+# Luna Music
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a music streaming application built with React that utilizes an unofficial JioSaavn API. It allows you to browse, play, and download music.
+This is a beta version and may contain bugs. I am actively working on improvements and will address any issues in future updates.
 
-Currently, two official plugins are available:
+## Installation
+1) Clone this repository.
+2) Install dependencies: ```npm i```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running the App
+
+Start the development server: ```npm run dev```
+
+You can check out it here - https://lunamusic.vercel.app/
