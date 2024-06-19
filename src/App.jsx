@@ -12,7 +12,7 @@ function App() {
 		thumbnail: "https://images.pexels.com/photos/2746823/pexels-photo-2746823.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
 		artist: "No artist found",
 		year: 2024,
-		duration: "00:00",
+		duration: 0,
 	});
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
@@ -21,7 +21,7 @@ function App() {
 	// API provides playCount in sec, this function will convert it mins i.e. ex- 03:09
 	const convertIntoMin = (sec) => {
 		return `${(sec / 60 < 10) ? "0" + Math.floor(sec / 60) : Math.floor(sec / 60)}:${
-			(sec % 60 < 10) ? "0" + (sec % 60) : sec % 60
+			(sec % 60 < 10) ? "0" + Math.floor(sec % 60) : Math.floor(sec % 60)
 		}`;
 	};
 

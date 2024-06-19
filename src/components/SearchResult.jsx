@@ -8,19 +8,11 @@ import { PiQueueBold } from "react-icons/pi";
 
 function SearchResult() {
 	// Data From API
+	// search - json data that api provides
+	// convertIntoMin is function that convert sec to min ( 202sec to 03:22)
 	const { searchData, convertIntoMin } = useContext(SearchContext);
 
-	const playMusic = () => {
-		setCurrentTrack(songToPlay);
-		setPause(true);
-		setTrackData({
-			name: getTrackData.name,
-			thumbnail: getTrackData.image[0].url,
-			artist: getTrackData.artists.primary[0].name,
-			year: getTrackData.year,
-			duration: convertIntoMin(getTrackData.duration),
-		});
-	};
+	
 
 	return (
 		<>
@@ -112,7 +104,7 @@ function SearchResult() {
 						3) All the Track data passed to component through props
 						*/}
 						{searchData.data.results
-							.filter((val) => val !== 0)
+							.filter((val) => searchData.data.results.indexOf(val) !== 0)
 							.map((val) => {
 								return (
 									<SongCard

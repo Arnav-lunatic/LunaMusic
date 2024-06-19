@@ -1,44 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { MdHome } from "react-icons/md";
 
 function NavBar({ sendValue }) {
-	const [searchValue, setSearchValue] = useState("");
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchValue, setSearchValue] = useState(searchParams.get('v') || '')
 
-	const search = (searchValue) => {
-		fetch(`https://saavn.dev/api/search/songs?query=${searchValue}`)
+	const navigate = useNavigate()
+
+	const search = (getSearch) => {
+		fetch(`https://saavn.dev/api/search/songs?query=${getSearch}`)
 			.then((response) => response.json())
-			.then((data) => {
-				sendValue(data);
-			});
+			.then((data) => sendValue(data));
 	};
-
-	useEffect(() => {
-		search(searchValue);
-	}, []);
 
 	const handleClick = () => {
+		setSearchParams({ v: searchValue })
 		search(searchValue);
 	};
 
+	const handleChange = (event) => {
+		setSearchValue(event.target.value)
+	}
+
+	useEffect(() => {
+		handleClick()
+	}, []);
+
 	return (
-		<div className="absolute m-auto top-2 right-1 left-1 md:right-4 md:left-4 flex justify-between pr-1 pl-2 md:pr-4 md:pl-4 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg">
+		<div className="absolute m-auto top-1 right-1 left-1 md:right-4 md:left-4 flex justify-between pr-1 pl-2 md:pr-4 md:pl-4 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg">
 			<Link to="/" className="flex items-center ">
-					<MdHome className="w-10 h-10" />
+				<MdHome className="w-10 h-10" />
 			</Link>
 			<div className="flex items-center m-2">
 				<input
 					type="text"
 					placeholder="Search"
 					value={searchValue}
+					onChange={handleChange}
 					onKeyPress={(e) => {
-						if (e.key === "Enter") handleClick();
+						if (e.key === "Enter") {
+							navigate(`/search?v=${searchValue}`)
+							handleClick();
+						}
 					}}
-					onChange={(e) => setSearchValue(e.target.value)}
 					className="p-2 w-screen max-w-52 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
 				/>
 
-				<Link to="/search" className="flex items-center ">
+				<Link to={`/search?v=${searchValue}`} className="flex items-center ">
 					<button
 						data-tooltip-id="my-tooltip"
 						data-tooltip-content="Search"

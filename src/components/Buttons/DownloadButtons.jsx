@@ -8,6 +8,7 @@ function DownloadButtons({ tooltipPosition, fileToDownload, fileTitle }) {
 	const [downloaded, setDownloaded] = useState(false);
 
 	const handleDownloading = () => {
+		setDownloaded(false)
 		isInProgress ? cancel() : download(fileToDownload, fileTitle + ".mp3");
 	};
 

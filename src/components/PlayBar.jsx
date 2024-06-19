@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+	useContext,
+	useEffect,
+	useState,
+	useRef,
+	useCallback,
+} from "react";
 import { FaPause, FaPlay } from "react-icons/fa";
 import { IoShuffle } from "react-icons/io5";
 import { IoPlaySkipBack, IoPlaySkipForward } from "react-icons/io5";
@@ -18,33 +24,53 @@ const PlayBar = () => {
 		convertIntoMin,
 	} = useContext(SearchContext);
 
-	const handlePlayPause = () => {
-		setPause(!pause);
-		if (pause) {
-			audioRef.current.pause();
-		} else {
-			audioRef.current.play();
-		}
-	};
+	// requestAnimationFrame is often used within lifecycle methods or hooks like useEffect to manage animations or perform tasks that need to happen just before a repaint.
+	// We will use this to update play time
+
+	const playAnimationRef = useRef();
+
+
+
+	const repeat = useCallback(() => {
+		const currentTime = audioRef.current.currentTime;
+		setPlayTime(currentTime);
+		progressBarRef.current.value = currentTime
+		progressBarRef.current.style.setProperty(
+			"--range-progress",
+			`${(progressBarRef.current.value / trackData.duration) * 100}%`
+		);
+
+		playAnimationRef.current = requestAnimationFrame(repeat);
+	}, [audioRef, trackData.duration, progressBarRef, setPlayTime]);
 
 	useEffect(() => {
-		setPlayTime(audioRef.current.currentTime);
-	}, []);
+		if (pause) {
+			audioRef.current.play();
+			playAnimationRef.current = requestAnimationFrame(repeat);
+		} else {
+			audioRef.current.pause();
+			cancelAnimationFrame(playAnimationRef.current);
+		}
+	}, [pause, audioRef, repeat]);
+
+	const onLoadMetaData = () => {
+		progressBarRef.current.max = trackData.duration
+	}
 
 	return (
 		<div className="fixed bottom-1 right-1 left-1 md:right-4 md:left-4 grid rounded-xl bg-black bg-opacity-40 backdrop-blur-lg">
-			{/* <div>
+			<div>
 				<input
 					type="range"
 					defaultValue="0"
 					ref={progressBarRef}
-					className="w-full "
+					className=" absolute left-1 right-1 top-0 "
 					onChange={() => {
 						audioRef.current.currentTime =
 							progressBarRef.current.value;
 					}}
 				/>
-			</div> */}
+			</div>
 
 			<div className=" flex h-20 items-center justify-between pr-2 pl-2 md:pr-4 md:pl-4">
 				<div className="flex w-1/4 md:w-1/3">
@@ -67,34 +93,37 @@ const PlayBar = () => {
 				</div>
 
 				<div className="flex items-center space-x-4">
-					<audio src={currentTrack} ref={audioRef} autoPlay />
+					<audio src={currentTrack} ref={audioRef} autoPlay onLoadedData={onLoadMetaData}/>
 
-						{/* <button className="text-2xl">
+					{/* <button className="text-2xl">
 							<RxLoop />
 						</button> 
 					<button className="text-2xl">
 						<IoPlaySkipBack />
 					</button>
 					*/}
-					<button onClick={handlePlayPause} className="text-2xl">
+					<button
+						onClick={() => setPause(!pause)}
+						className="text-2xl"
+					>
 						{pause ? <FaPause /> : <FaPlay />}
 					</button>
 					{/*
 					<button className="text-2xl">
 						<IoPlaySkipForward />
 					</button>
-					 <button className="text-2xl">
+					<button className="text-2xl">
 						<IoShuffle />
 					</button> */}
 				</div>
 
+				{/* playTime */}
 				<div className="hidden md:block text-lg text-right w-1/3">
-					{/* {convertIntoMin(playTime)} /  */}
-					{trackData.duration}
+					{convertIntoMin(playTime)} /{convertIntoMin(trackData.duration)}
 				</div>
 				<div className="block md:hidden text-lg text-right w-1/4">
-					{/* <div>{convertIntoMin(playTime)}</div>*/}
-					<div>{trackData.duration}</div> 
+					<div>{convertIntoMin(playTime)}</div>
+					<div>{convertIntoMin(trackData.duration)}</div>
 				</div>
 			</div>
 		</div>

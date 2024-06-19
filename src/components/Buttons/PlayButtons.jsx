@@ -6,11 +6,11 @@ function PlayButtons({
 	tooltipPosition,
 	songToPlay,
 	getTrackData,
-	duration,
 }) {
 	const { setCurrentTrack, setPause, setTrackData, convertIntoMin } =
 		useContext(SearchContext);
 
+	// When any play any particular track, this will set the track data in playBar 
 	const playMusic = () => {
 		setCurrentTrack(songToPlay);
 		setPause(true);
@@ -19,7 +19,7 @@ function PlayButtons({
 			thumbnail: getTrackData.image[0].url,
 			artist: getTrackData.artists.primary[0].name,
 			year: getTrackData.year,
-			duration: convertIntoMin(getTrackData.duration),
+			duration: getTrackData.duration,
 		});
 	};
 
