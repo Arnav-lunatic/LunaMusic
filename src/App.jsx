@@ -3,6 +3,8 @@ import { NavBar, PlayBar } from "./components";
 import { Outlet } from "react-router-dom";
 import { SearchContext } from "./context/SearchContext";
 import { Tooltip } from "react-tooltip";
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
 	const [searchData, setSearchData] = useState([]);
@@ -49,7 +51,9 @@ function App() {
 		>
 			<NavBar sendValue={(searchData) => setSearchData(searchData)} />
 			<Outlet />
-			<PlayBar/>
+			<PlayBar />
+			<Analytics />
+			<SpeedInsights/>
 			<Tooltip
 				id="my-tooltip"
 				style={{
