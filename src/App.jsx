@@ -6,14 +6,19 @@ import { Tooltip } from "react-tooltip";
 
 function App() {
 	const [searchData, setSearchData] = useState([]);
-	const [currentTrack, setCurrentTrack] = useState("/src/assets/default.wav");
-	const [trackData, setTrackData] = useState({
+	const [currentTrack, setCurrentTrack] = useState({
+		path: "/src/assets/default.wav",
+		id: 1,
 		name: "No track found",
-		thumbnail: "https://images.pexels.com/photos/2746823/pexels-photo-2746823.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+		thumbnail_50x50: "/src/assets/default_thumbnail_50x50.jpg",
+		thumbnail_500x500: "/src/assets/default_thumbnail_500x500.jpg",
 		artist: "No artist found",
 		year: 2024,
 		duration: 0,
 	});
+	const [queue, setQueue] = useState([])
+	const [queueCount, setQueueCount] = useState(0)
+
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
 	const progressBarRef = useRef()
@@ -31,13 +36,15 @@ function App() {
 				searchData,
 				currentTrack,
 				setCurrentTrack,
-				trackData,
-				setTrackData,
 				pause,
 				setPause,
 				audioRef,
 				convertIntoMin,
 				progressBarRef,
+				queue,
+				setQueue,
+				queueCount,
+				setQueueCount
 			}}
 		>
 			<NavBar sendValue={(searchData) => setSearchData(searchData)} />

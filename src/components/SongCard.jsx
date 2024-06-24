@@ -1,72 +1,74 @@
-import React from "react";
+import React, { useContext } from "react";
 import DownloadButtons from "./Buttons/DownloadButtons";
 import PlayButtons from "./Buttons/PlayButtons";
 import { FaRegSave } from "react-icons/fa";
 import { PiQueueBold } from "react-icons/pi";
+import { SearchContext } from "../context/SearchContext";
 
 const SongCard = ({
-	imageUrl,
-	duration,
-	title,
-	artist,
-	playCount,
-	year,
-	songToPlay,
-	getTrackData,
-	fileToDownload,
-	fileTitle,
+	track_data,
+	add_to_queue,
 }) => {
+	const {convertIntoMin} = useContext(SearchContext)
+	const playCount = track_data.playCount !== null ? track_data.playCount.toLocaleString() : ""
+
 	return (
 		<div className="grid gap-4 bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg xl:max-w-3xl">
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
-						src={imageUrl}
+						src={track_data.image[0].url}
 						alt="Song Art"
 						className="rounded-lg h-16 w-16"
 					/>
 					<div className="absolute bottom-1 right-1 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md text-xs">
-						{duration}
+						{convertIntoMin(track_data.duration)}
 					</div>
 				</div>
 				<div className="ml-4 flex-grow">
 					<h2 className="text-sm max-w-36 lg:max-w-56 xl:max-w-sm md:text-lg font-bold truncate">
-						{title}
+						{track_data.name}
 					</h2>
 					<p className="text-gray-400 max-w-36 md:max-w-xs truncate">
-						{artist}
+						{track_data.artists.primary[0].name}
 					</p>
 				</div>
 				<div className="hidden md:flex flex-col items-end ml-4">
 					<span className="text-gray-500 text-sm">{playCount}</span>
-					<span className="text-gray-500 text-sm">{year}</span>
+					<span className="text-gray-500 text-sm">{track_data.year}</span>
 				</div>
 
 				<div className="flex gap-2 items-center">
 					<DownloadButtons
 						tooltipPosition={"bottom"}
-						fileToDownload={fileToDownload}
-						fileTitle={fileTitle}
+						fileToDownload={track_data.downloadUrl[4].url}
+						fileTitle={track_data.name}
 					/>
 					<PlayButtons
 						tooltipPosition={"bottom"}
-						songToPlay={songToPlay}
-						getTrackData={getTrackData}
+						songToPlay={track_data.downloadUrl[4].url}
+						getTrackData={track_data}
 					/>
 				</div>
 			</div>
 
-			{/* <div className="flex font-semibold">
+			<div className="flex font-semibold">
 				<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
 					<FaRegSave className="h-5 w-5" />
-					<p>Add to Save</p>
+					<p>
+						Coming Soon
+						{/* Add to Save */}
+					</p>
 				</button>
 				<div className="font-extralight text-3xl">|</div>
-				<button className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600">
+				<button
+					className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
+					onClick={() => add_to_queue(track_data)}
+				>
 					<PiQueueBold className="h-6 w-6"/>
 					Add to Queue
 				</button>
-			</div> */}
+			</div>
 		</div>
 	);
 };

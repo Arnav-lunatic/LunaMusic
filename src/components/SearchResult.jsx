@@ -10,20 +10,35 @@ function SearchResult() {
 	// Data From API
 	// search - json data that api provides
 	// convertIntoMin is function that convert sec to min ( 202sec to 03:22)
-	const { searchData, convertIntoMin } = useContext(SearchContext);
+	const { searchData, convertIntoMin, setCurrentTrack, queue, setQueue } = useContext(SearchContext);
 
+	const first_track_data = searchData.data?.results
 	
+	const add_to_queue = (newItem) => {
+		const newItemObj = {
+			id: newItem.id,
+			path: newItem.downloadUrl[4].url ,
+			name: newItem.name,
+			thumbnail_50x50: newItem.image[0].url,
+			thumbnail_500x500: newItem.image[2].url,
+			artist: newItem.artists.primary[0].name,
+			year: newItem.year,
+			duration: newItem.duration,
+		}
+		setQueue((queue) => [...queue, newItemObj])
+		queue.length===0 ? setCurrentTrack(newItemObj) : ''
+	}
 
 	return (
 		<>
 			{searchData.success && (
 				<div className="flex p-2 pt-20 pb-28 lg:flex-row flex-col gap-2 h-screen lg:overflow">
 					<div className="flex items-center w-full lg:w-1/2">
-						<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg m-auto md:7/12">
+						<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg m-auto md:w-7/12">
 							<div className="relative w-full">
 								<img
 									src={
-										searchData.data.results[0]?.image[2].url
+										first_track_data[0]?.image[2].url
 									}
 									alt="Song Art"
 									className="rounded-lg w-full min-w-48"
@@ -32,17 +47,12 @@ function SearchResult() {
 									{/* duration */}
 									<span className="mr-1 font-semibold text-lg">
 										{convertIntoMin(
-											searchData.data.results[0]?.duration
+											first_track_data[0]?.duration
 										)}
 									</span>
 									<PlayButtons
 										tooltipPosition={"right"}
-										songToPlay={
-											searchData.data.results[0]?.downloadUrl[4].url
-										}
-										getTrackData={
-											searchData.data.results[0]
-										}
+										getTrackData={first_track_data[0]}
 									/>
 								</div>
 							</div>
@@ -51,20 +61,20 @@ function SearchResult() {
 									<div>
 										{/* title */}
 										<h2 className="text-2xl font-bold">
-											{searchData.data.results[0]?.name}
+											{first_track_data[0]?.name}
 										</h2>
 										{/* artist */}
 										<p className="text-gray-400">
 											{
-												searchData.data.results[0]?.artists.primary[0].name
+												first_track_data[0]?.artists.primary[0].name
 											}
 										</p>
 									</div>
 									<div>
 										<DownloadButtons
 											tooltipPosition={"right"}
-											fileToDownload={searchData.data.results[0]?.downloadUrl[4].url}
-											fileTitle={searchData.data.results[0]?.name}
+											fileToDownload={first_track_data[0]?.downloadUrl[4].url}
+											fileTitle={first_track_data[0]?.name}
 										/>
 									</div>
 								</div>
@@ -72,27 +82,33 @@ function SearchResult() {
 								<div className="mt-2 flex justify-between text-gray-500 text-sm">
 									{/* play count */}
 									<span>
-										{searchData.data.results[0]?.playCount.toLocaleString()}
+										{first_track_data[0]?.playCount.toLocaleString()}
 									</span>
 									{/* year */}
 									<span>
-										{searchData.data.results[0]?.year}
+										{first_track_data[0]?.year}
 									</span>
 								</div>
 							</div>
-							{/* <div className="flex font-semibold">
+							<div className="flex font-semibold">
 								<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
 									<FaRegSave className="h-5 w-5" />
-									<p>Add to Save</p>
+									<p>
+										Coming Soon
+										{/* Add to Save */}
+									</p>
 								</button>
 								<div className="font-extralight text-3xl">
 									|
 								</div>
-								<button className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600">
+								<button
+									className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
+									onClick={() => add_to_queue(first_track_data[0])}
+								>
 									<PiQueueBold className="h-6 w-6" />
 									Add to Queue
 								</button>
-							</div> */}
+							</div>
 						</div>
 					</div>
 
@@ -104,25 +120,13 @@ function SearchResult() {
 						3) All the Track data passed to component through props
 						*/}
 						{searchData.data.results
-							.filter((val) => searchData.data.results.indexOf(val) !== 0)
-							.map((val) => {
+							.filter((other_track_data) => first_track_data.indexOf(other_track_data) !== 0)
+							.map((other_track_data) => {
 								return (
 									<SongCard
-										key={val.id}
-										imageUrl={val.image[0].url}
-										duration={convertIntoMin(val.duration)}
-										title={val.name}
-										artist={val.artists.primary[0].name}
-										playCount={
-											val.playCount !== null
-												? val.playCount.toLocaleString()
-												: ""
-										}
-										year={val.year}
-										songToPlay={val.downloadUrl[4].url}
-										getTrackData={val}
-										fileToDownload={val.downloadUrl[4].url}
-										fileTitle={val.name}
+										track_data={other_track_data}
+										key={other_track_data.id}
+										add_to_queue={add_to_queue}
 									/>
 								);
 							})}
