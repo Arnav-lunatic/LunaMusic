@@ -234,11 +234,12 @@ const PlayBar = () => {
 				</div>
 
 				<div
-					onClick={handleFullScreen}
 					className=" flex h-20 items-center justify-between pr-2 pl-2 md:pr-4 md:pl-4 cursor-pointer"
 				>
-					<div className="flex w-1/4 md:w-1/3 pl-0 md:pl-7">
+					<div
+						className="flex w-1/4 md:w-1/3 pl-0 md:pl-7">
 						<img
+							onClick={handleFullScreen}
 							className="w-12 h-12 md:mr-4 md:w-16 md:h-16 rounded-lg"
 							src={currentTrack?.thumbnail_50x50}
 							alt="img"
