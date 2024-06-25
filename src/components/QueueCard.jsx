@@ -6,7 +6,7 @@ function QueueCard() {
 
 	const FirstQueueElem = ({ thumbnail_50x50, trackName, artist }) => {
 		return (
-			<div className="flex items-start w-full bg-zinc-400 bg-opacity-15 rounded-lg p-2 backdrop-blur-xl mb-4 scale-105  shadow-sm shadow-gray-700">
+			<div className="flex items-start w-full bg-zinc-400 bg-opacity-15 rounded-lg p-2 backdrop-blur-xl mb-4 shadow-sm shadow-gray-700">
 				<div className="flex items-center gap-4 justify-start w-full">
 					<img
 						className="h-16 w-16 rounded-lg"
@@ -31,7 +31,7 @@ function QueueCard() {
 
 	const OtherQueueElem = ({ thumbnail_50x50, trackName, artist }) => {
 		return (
-			<div className="flex items-start w-full pb-4 scale-95 md:scale-100">
+			<div className="flex items-start w-full pb-4 scale-95">
 				<div className="flex items-center gap-4 justify-start w-full">
 					<img
 						className="h-16 w-16 rounded-lg"

@@ -19,7 +19,7 @@ function SearchResult() {
 			id: newItem.id,
 			path: newItem.downloadUrl[4].url ,
 			name: newItem.name,
-			thumbnail_50x50: newItem.image[0].url,
+			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
 			artist: newItem.artists.primary[0].name,
 			year: newItem.year,
