@@ -52,7 +52,7 @@ const SongCard = ({
 				</div>
 			</div>
 
-			<div className="flex font-semibold">
+			<div className="flex font-semibold items-center text-sm md:text-lg">
 				<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
 					<FaRegSave className="h-5 w-5" />
 					<p>
@@ -60,7 +60,7 @@ const SongCard = ({
 						{/* Add to Save */}
 					</p>
 				</button>
-				<div className="font-extralight text-3xl">|</div>
+				<div className="font-extralight text-xl md:text-3xl">|</div>
 				<button
 					className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
 					onClick={() => add_to_queue(track_data)}

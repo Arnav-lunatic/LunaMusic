@@ -6,7 +6,7 @@ function PlayButtons({
 	tooltipPosition,
 	getTrackData,
 }) {
-	const {setCurrentTrack, setPause, setQueue, setQueueCount } =
+	const {setCurrentTrack, setPause, setQueue } =
 		useContext(SearchContext);
 
 	// When any play any particular track, this will set the track data in playBar
@@ -14,7 +14,6 @@ function PlayButtons({
 	
 	const playMusic = () => {
 		setPause(true);
-		setQueueCount(0)
 		setCurrentTrack({
 			id: getTrackData.id,
 			path: song_to_play ,

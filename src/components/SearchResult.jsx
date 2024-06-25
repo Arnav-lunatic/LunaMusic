@@ -82,7 +82,7 @@ function SearchResult() {
 								<div className="mt-2 flex justify-between text-gray-500 text-sm">
 									{/* play count */}
 									<span>
-										{first_track_data[0]?.playCount.toLocaleString()}
+										{first_track_data[0]?.playCount?.toLocaleString()}
 									</span>
 									{/* year */}
 									<span>
@@ -90,7 +90,7 @@ function SearchResult() {
 									</span>
 								</div>
 							</div>
-							<div className="flex font-semibold">
+							<div className="flex font-semibold items-center text-sm md:text-lg">
 								<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
 									<FaRegSave className="h-5 w-5" />
 									<p>
@@ -98,11 +98,11 @@ function SearchResult() {
 										{/* Add to Save */}
 									</p>
 								</button>
-								<div className="font-extralight text-3xl">
+								<div className="font-extralight text-xl md:text-3xl">
 									|
 								</div>
 								<button
-									className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
+									className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
 									onClick={() => add_to_queue(first_track_data[0])}
 								>
 									<PiQueueBold className="h-6 w-6" />
