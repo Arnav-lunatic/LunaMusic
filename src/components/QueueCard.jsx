@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 import { TiDelete } from "react-icons/ti";
 
-
 function QueueCard() {
 	const { queue, setQueue } = useContext(SearchContext);
 
@@ -31,49 +30,48 @@ function QueueCard() {
 		);
 	};
 
-	const OtherQueueElem = ({ thumbnail_50x50, trackName, artist, delete_this_track , play_this_track}) => {
+	const OtherQueueElem = ({
+		thumbnail_50x50,
+		trackName,
+		artist,
+		delete_this_track,
+		play_this_track,
+	}) => {
 		return (
-			<div className="flex items-center w-full pb-4 scale-95">
-				<div
-					onClick={play_this_track}
-					className="flex items-center gap-4 justify-start w-full cursor-pointer">
-					<img
-						className="h-16 w-16 rounded-lg"
-						src={thumbnail_50x50}
-						alt="thumbnail 50x50"
-					/>
-					<div>
-						<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-full">
-							{trackName}
-						</h1>
-						<h1 className="text-sm max-w-60 truncate md:max-w-full">
-							{artist}
-						</h1>
-					</div>
-				</div>
-				<div
-					onClick={delete_this_track}
-					className="w-8 h-8 cursor-pointer">
-					<TiDelete className="w-full h-full"/>
+			<div
+				onClick={play_this_track}
+				className="flex items-center gap-4 justify-start w-full pb-4 cursor-pointer"
+			>
+				<img
+					className="h-16 w-16 rounded-lg"
+					src={thumbnail_50x50}
+					alt="thumbnail 50x50"
+				/>
+				<div>
+					<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-full">
+						{trackName}
+					</h1>
+					<h1 className="text-sm max-w-60 truncate md:max-w-full">
+						{artist}
+					</h1>
 				</div>
 			</div>
 		);
 	};
 
 	const handleClick = (index) => {
-		const queueContainer = [...queue]
-		const given_queue_elem = queue[index]
-		queueContainer.splice(index, 1)
-		queueContainer.unshift(given_queue_elem)
-		setQueue(queueContainer)
-	}
+		const queueContainer = [...queue];
+		const given_queue_elem = queue[index];
+		queueContainer.splice(index, 1);
+		queueContainer.unshift(given_queue_elem);
+		setQueue(queueContainer);
+	};
 
 	const handleDelete = (index) => {
-		const queueContainer = [...queue]
-		queueContainer.splice(index, 1)
-		setQueue(queueContainer)
-	}
-	
+		const queueContainer = [...queue];
+		queueContainer.splice(index, 1);
+		setQueue(queueContainer);
+	};
 
 	return (
 		<div className="w-full h-4/5 md:p-10">
@@ -96,14 +94,28 @@ function QueueCard() {
 					.filter((elem) => elem !== queue[0])
 					.map((eachQueue, index) => {
 						return (
-							<OtherQueueElem
-								key={eachQueue.id}
-								play_this_track={() => handleClick(index + 1)}
-								delete_this_track={()=>handleDelete(index+1)}
-								thumbnail_50x50={eachQueue.thumbnail_50x50}
-								trackName={eachQueue.name}
-								artist={eachQueue.artist}	
-							/>
+							<div className="relative flex items-center justify-between scale-95">
+								
+								// invisible button because on OtherQueueElem onClick isn't working on mouse click
+								<button
+									onClick={() => handleClick(index + 1)}
+									className="absolute top-0 bottom-0 right-10 left-0 z-10">
+								</button>
+
+								<OtherQueueElem
+									key={eachQueue.id}
+									thumbnail_50x50={eachQueue.thumbnail_50x50}
+									trackName={eachQueue.name}
+									artist={eachQueue.artist}
+								/>
+								
+								<button
+									onClick={() => handleDelete(index + 1)}
+									className="w-8 h-8 cursor-pointer"
+								>
+									<TiDelete className="w-full h-full" />
+								</button>
+							</div>
 						);
 					})}
 			</div>

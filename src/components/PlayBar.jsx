@@ -6,12 +6,12 @@ import React, {
 	useCallback,
 } from "react";
 import { FaPause, FaPlay, FaRegSave, FaVolumeUp } from "react-icons/fa";
-					import {
-						IoShuffle,
-						IoClose,
-						IoPlaySkipBack,
-						IoPlaySkipForward,
-					} from "react-icons/io5";
+import {
+	IoShuffle,
+	IoClose,
+	IoPlaySkipBack,
+	IoPlaySkipForward,
+} from "react-icons/io5";
 import { RxLoop } from "react-icons/rx";
 import { SearchContext } from "../context/SearchContext";
 import {
