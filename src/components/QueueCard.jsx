@@ -95,8 +95,8 @@ function QueueCard() {
 					.map((eachQueue, index) => {
 						return (
 							<div className="relative flex items-center justify-between scale-95">
-								
-								// invisible button because on OtherQueueElem onClick isn't working on mouse click
+
+								{/* invisible button because on OtherQueueElem onClick isn't working on mouse click */}
 								<button
 									onClick={() => handleClick(index + 1)}
 									className="absolute top-0 bottom-0 right-10 left-0 z-10">
