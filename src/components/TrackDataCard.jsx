@@ -2,7 +2,7 @@ import React from 'react'
 
 const TrackDataCard = ({track, name, artist, year}) => {
     return (
-        <div>
+        <div className='w-full'>
             <img
                 className="rounded-t-lg w-full lg:inline-block"
                 src={track}

@@ -6,12 +6,12 @@ import React, {
 	useCallback,
 } from "react";
 import { FaPause, FaPlay, FaRegSave, FaVolumeUp } from "react-icons/fa";
-import {
-	IoShuffle,
-	IoClose,
-	IoPlaySkipBack,
-	IoPlaySkipForward,
-} from "react-icons/io5";
+					import {
+						IoShuffle,
+						IoClose,
+						IoPlaySkipBack,
+						IoPlaySkipForward,
+					} from "react-icons/io5";
 import { RxLoop } from "react-icons/rx";
 import { SearchContext } from "../context/SearchContext";
 import {
@@ -102,10 +102,12 @@ const PlayBar = () => {
 
 	const [displayQueue, setDisplayQueue] = useState(false);
 	const [displayTrackData, setDisplayTrackData] = useState(true);
+
 	const handle_view_queue = () => {
 		setDisplayQueue(true);
 		setDisplayTrackData(false);
 	};
+
 	const handle_view_trackData = () => {
 		setDisplayQueue(false);
 		setDisplayTrackData(true);
@@ -128,18 +130,21 @@ const PlayBar = () => {
 						<IoClose className="w-full h-full" />
 					</button>
 
-					<div className="w-full md:w-1/2 max-w-xl p-4 md:p-10">
-						<div className="min-h-96 w-full">
-							{displayTrackData && (
+					<div className="relative w-full md:w-1/2 max-w-xl p-4 md:p-10">
+						<div className="h-5/6">
+							
+							<div className={`absolute top-3 left-4 right-4 transition-all duration-500 z-50 ${displayTrackData? 'translate-x-0 visible' : 'translate-x-full invisible'}`}>
 								<TrackDataCard
 									track={currentTrack?.thumbnail_500x500}
 									name={currentTrack?.name}
 									artist={currentTrack?.artist}
 									year={currentTrack?.year}
 								/>
-							)}
+							</div>
 
-							{displayQueue && <QueueCard/>}
+							<div className={`absolute top-3 left-4 right-4 transition-all duration-500 ${displayQueue ? 'translate-x-0 visible' : '-translate-x-full invisible'}`}>
+								<QueueCard />
+							</div>
 						</div>
 						
 
