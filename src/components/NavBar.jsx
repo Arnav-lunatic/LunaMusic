@@ -1,17 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { MdHome } from "react-icons/md";
+import { SearchContext } from "../context/SearchContext";
 
 function NavBar({ sendValue }) {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [searchValue, setSearchValue] = useState(searchParams.get('v') || '')
+	const {setIsLoading} = useContext(SearchContext)
 
 	const navigate = useNavigate()
 
 	const search = (getSearch) => {
+		setIsLoading(true)
 		fetch(`https://saavn.dev/api/search/songs?query=${getSearch}`)
 			.then((response) => response.json())
-			.then((data) => sendValue(data));
+			.then((data) => {
+				sendValue(data)
+				setIsLoading(false)
+			})
 	};
 
 	const handleClick = () => {

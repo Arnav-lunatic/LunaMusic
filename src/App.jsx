@@ -21,6 +21,7 @@ function App() {
 		duration: 0,
 	});
 	const [queue, setQueue] = useState([])
+	const [isLoading, setIsLoading] = useState(true)
 
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
@@ -46,6 +47,8 @@ function App() {
 				progressBarRef,
 				queue,
 				setQueue,
+				isLoading,
+				setIsLoading,
 			}}
 		>
 			<NavBar sendValue={(searchData) => setSearchData(searchData)} />

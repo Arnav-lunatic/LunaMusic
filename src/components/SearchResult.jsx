@@ -5,41 +5,56 @@ import DownloadButtons from "./Buttons/DownloadButtons";
 import PlayButtons from "./Buttons/PlayButtons";
 import { FaRegSave } from "react-icons/fa";
 import { PiQueueBold } from "react-icons/pi";
+import ReactLoading from "react-loading";
 
 function SearchResult() {
 	// Data From API
 	// search - json data that api provides
 	// convertIntoMin is function that convert sec to min ( 202sec to 03:22)
-	const { searchData, convertIntoMin, setCurrentTrack, queue, setQueue } = useContext(SearchContext);
+	const {
+		searchData,
+		convertIntoMin,
+		setCurrentTrack,
+		queue,
+		setQueue,
+		isLoading,
+	} = useContext(SearchContext);
 
-	const first_track_data = searchData.data?.results
-	
+	const first_track_data = searchData.data?.results;
+
 	const add_to_queue = (newItem) => {
 		const newItemObj = {
 			id: newItem.id,
-			path: newItem.downloadUrl[4].url ,
+			path: newItem.downloadUrl[4].url,
 			name: newItem.name,
 			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
 			artist: newItem.artists.primary[0].name,
 			year: newItem.year,
 			duration: newItem.duration,
-		}
-		setQueue((queue) => [...queue, newItemObj])
-		queue.length===0 ? setCurrentTrack(newItemObj) : ''
-	}
+		};
+		setQueue((queue) => [...queue, newItemObj]);
+		queue.length === 0 ? setCurrentTrack(newItemObj) : "";
+	};
 
 	return (
 		<>
-			{searchData.success && (
+			{isLoading ? (
+				<div className="absolute left-1/2 top-1/2 -translate-x-1/2	-translate-y-1/2">
+					<ReactLoading
+						type="cylon"
+						color="#9233EA"
+						height={200}
+						width={200}
+					/>
+				</div>
+			) : (
 				<div className="flex p-2 pt-20 pb-28 lg:flex-row flex-col gap-2 h-screen lg:overflow">
 					<div className="flex items-center w-full lg:w-1/2">
 						<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg m-auto md:w-7/12">
 							<div className="relative w-full">
 								<img
-									src={
-										first_track_data[0]?.image[2].url
-									}
+									src={first_track_data[0]?.image[2].url}
 									alt="Song Art"
 									className="rounded-lg w-full min-w-48"
 								/>
@@ -66,15 +81,21 @@ function SearchResult() {
 										{/* artist */}
 										<p className="text-gray-400">
 											{
-												first_track_data[0]?.artists.primary[0].name
+												first_track_data[0]?.artists
+													.primary[0].name
 											}
 										</p>
 									</div>
 									<div>
 										<DownloadButtons
 											tooltipPosition={"right"}
-											fileToDownload={first_track_data[0]?.downloadUrl[4].url}
-											fileTitle={first_track_data[0]?.name}
+											fileToDownload={
+												first_track_data[0]
+													?.downloadUrl[4].url
+											}
+											fileTitle={
+												first_track_data[0]?.name
+											}
 										/>
 									</div>
 								</div>
@@ -85,9 +106,7 @@ function SearchResult() {
 										{first_track_data[0]?.playCount?.toLocaleString()}
 									</span>
 									{/* year */}
-									<span>
-										{first_track_data[0]?.year}
-									</span>
+									<span>{first_track_data[0]?.year}</span>
 								</div>
 							</div>
 							<div className="flex font-semibold items-center text-sm md:text-lg">
@@ -103,7 +122,9 @@ function SearchResult() {
 								</div>
 								<button
 									className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
-									onClick={() => add_to_queue(first_track_data[0])}
+									onClick={() =>
+										add_to_queue(first_track_data[0])
+									}
 								>
 									<PiQueueBold className="h-6 w-6" />
 									Add to Queue
@@ -120,7 +141,12 @@ function SearchResult() {
 						3) All the Track data passed to component through props
 						*/}
 						{searchData.data.results
-							.filter((other_track_data) => first_track_data.indexOf(other_track_data) !== 0)
+							.filter(
+								(other_track_data) =>
+									first_track_data.indexOf(
+										other_track_data
+									) !== 0
+							)
 							.map((other_track_data) => {
 								return (
 									<SongCard
