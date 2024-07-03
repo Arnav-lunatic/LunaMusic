@@ -329,7 +329,7 @@ const PlayBar = () => {
 							<PiTimerBold className="w-6 h-6 " />
 							<span className="font-bold">{sleepTimer}</span>
 						</button>
-						{show_sleep_timer_menu ? (
+						{show_sleep_timer_menu && !isFullscreen ? (
 							<SleepTimerElem setSleepTimer={setSleepTimer} show_sleep_timer_menu={show_sleep_timer_menu} setShow_sleep_timer_menu={setShow_sleep_timer_menu} />
 						) : (
 							""
@@ -338,19 +338,20 @@ const PlayBar = () => {
 
 					{/* sleep timer button smaller screen */}
 					{isFullscreen && (
-						<button
-							onClick={handle_view_sleep_timer}
-							className="flex gap-1 absolute right-2 md:hidden"
-						>
-							<PiTimerBold className="w-6 h-6 " />
-							<span className="font-bold">{sleepTimer}</span>
-
-							{show_sleep_timer_menu ? (
+						<>
+							<button
+								onClick={handle_view_sleep_timer}
+								className="flex gap-1 absolute right-2 md:hidden"
+							>
+								<PiTimerBold className="w-6 h-6 " />
+								<span className="font-bold">{sleepTimer}</span>
+							</button>
+							{show_sleep_timer_menu && isFullscreen ? (
 								<SleepTimerElem setSleepTimer={setSleepTimer} show_sleep_timer_menu={show_sleep_timer_menu} setShow_sleep_timer_menu={setShow_sleep_timer_menu} />
 							) : (
 								""
-							)}
-						</button>
+								)}
+						</>
 					)}
 				</div>
 			</div>

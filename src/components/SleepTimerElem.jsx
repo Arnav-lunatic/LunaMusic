@@ -16,32 +16,24 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
 		);
     };
 
-            const sleepTimerRef = useRef()
-            
-            useEffect(() => {
-                const handler = (event) => {
-                    if (show_sleep_timer_menu && sleepTimerRef.current && !sleepTimerRef.current.contains(event.target)) {
-                        setShow_sleep_timer_menu(false);
-                    }
-                };
-                document.addEventListener("mousedown", handler);
-                document.addEventListener("touchstart", handler);
-                return () => {
-                    // Cleanup the event listener
-                    document.removeEventListener("mousedown", handler);
-                    document.removeEventListener("touchstart", handler);
-                };
-            }, [show_sleep_timer_menu]);
+    const sleepTimerRef = useRef()
+    
+    useEffect(() => {
+        const handler = (event) => {
+            if (show_sleep_timer_menu && sleepTimerRef.current && !sleepTimerRef.current.contains(event.target)) {
+                setShow_sleep_timer_menu(false);
+            }
+        };
+        document.addEventListener("mousedown", handler);
+        document.addEventListener("touchstart", handler);
+        return () => {
+            // Cleanup the event listener
+            document.removeEventListener("mousedown", handler);
+            document.removeEventListener("touchstart", handler);
+        };
+    }, [show_sleep_timer_menu]);
 
     const buttonContent = ['Off', 10, 20, 30, 45, /*"Custom"*/];
-
-    /*
-    const delay = 1000 * 60 * 5; // 5 minutes
-    const timer = setTimeout(() => console.log("Hi"), delay);
-    const timerEnd = new Date().getTime() + delay;
-    // Get ms left to timeout
-    const msToEnd = timerEnd - new Date().getTime();
-    */ 
     
     const handleClick = (time) => {
         const totalTime = time * 60 * 1000
@@ -49,7 +41,8 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
             setPause(false)
             setSleepTimer('Not Set')
         }, totalTime);
-        setSleepTimer(time + ' Minutes')
+
+        setSleepTimer(time + ' Mins')   
     }
 
     
@@ -58,7 +51,7 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
 
 
     return (
-        <div className="grid gap-2 absolute bottom-24 right-0 bg-zinc-900 rounded-lg p-2 min-w-36 md:text-lg">
+        <div className="grid gap-2 absolute bottom-24 right-0 bg-zinc-900 rounded-lg p-2 min-w-36 md:text-lg z-100  ">
             <div ref={sleepTimerRef}>
                 {buttonContent.map((content) => {
                     return (
