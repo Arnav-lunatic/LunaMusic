@@ -19,12 +19,14 @@ import {
 	MdOutlineQueueMusic,
 	MdMusicNote,
 } from "react-icons/md";
-import { FaS } from "react-icons/fa6";
 import QueueCard from "./QueueCard";
+import SleepTimerElem from "./SleepTimerElem";
 import TrackDataCard from "./TrackDataCard";
+import { PiTimerBold } from "react-icons/pi";
 
 const PlayBar = () => {
 	const [playTime, setPlayTime] = useState(0);
+	const [sleepTimer, setSleepTimer] = useState("Not Set");
 	const {
 		currentTrack,
 		setCurrentTrack,
@@ -112,6 +114,13 @@ const PlayBar = () => {
 		setDisplayQueue(false);
 		setDisplayTrackData(true);
 	};
+
+	const [show_sleep_timer_menu, setShow_sleep_timer_menu] = useState(false);
+
+	const handle_view_sleep_timer = () => {
+		setShow_sleep_timer_menu(!show_sleep_timer_menu);
+	};
+
 	// volume
 	const [volume, setVolume] = useState(50);
 	const handleVolumeChange = () => {};
@@ -122,54 +131,69 @@ const PlayBar = () => {
 				${isFullscreen ? "h-full bg-black bg-opacity-40 backdrop-blur-lg" : "h-4"}`}
 		>
 			{isFullscreen && (
-				<div className="flex gap-2 w-full h-full justify-around mt-10 pb-32 md:pb-0">
-					<button
-						onClick={handleFullScreen}
-						className={`absolute top-4 left-4 w-8 h-8 hover:bg-white hover:backdrop-blur-lg hover:bg-opacity-30 rounded-full transition-all`}
-					>
-						<IoClose className="w-full h-full" />
-					</button>
-
-					<div className="relative w-full md:w-1/2 max-w-xl p-4 md:p-10">
-						<div className="h-5/6">
-							
-							<div className={`absolute top-3 left-4 right-4 transition-all duration-500 z-50 ${displayTrackData? 'translate-x-0 visible' : 'translate-x-full invisible'}`}>
-								<TrackDataCard
-									track={currentTrack?.thumbnail_500x500}
-									name={currentTrack?.name}
-									artist={currentTrack?.artist}
-									year={currentTrack?.year}
-								/>
-							</div>
-
-							<div className={`absolute top-3 left-4 right-4 transition-all duration-500 ${displayQueue ? 'translate-x-0 visible' : '-translate-x-full invisible'}`}>
-								<QueueCard />
-							</div>
-						</div>
-						
-
-						<div className="md:hidden flex items-center justify-evenly m-auto w-28 mt-2 bg-zinc-400 bg-opacity-15 rounded-full p-2 backdrop-blur-xl">
-							<MdOutlineQueueMusic
-								onClick={handle_view_queue}
-								className={`w-8 h-8 rounded-full p-1 ${
-									displayQueue ? "bg-zinc-700" : ""
-								}`}
-							/>
-							<MdMusicNote
-								onClick={handle_view_trackData}
-								className={`w-8 h-8 rounded-full p-1 ${
-									displayTrackData ? "bg-zinc-700" : ""
-								}`}
-							/>
-						</div>
+				<div className=" w-screen h-full justify-around">
+					<div className="w-full pt-4 pl-2 pr-2">
+						<button
+							onClick={handleFullScreen}
+							className={`w-8 h-8 hover:bg-white hover:backdrop-blur-lg hover:bg-opacity-30 rounded-full transition-all`}
+						>
+							<IoClose className="w-full h-full" />
+						</button>
 					</div>
 
-					<div className="w-1/2 hidden md:inline-block">
-						<QueueCard />
+					<div className="flex gap-2 w-full h-full justify-around mt-10 pb-36 md:pb-0">
+						<div className="relative w-full md:w-1/2 max-w-xl p-4 md:p-10">
+							<div className="h-5/6">
+								<div
+									className={`absolute top-3 left-4 right-4 transition-all duration-500 ${
+										displayTrackData
+											? "translate-x-0 visible"
+											: "translate-x-full invisible"
+									}`}
+								>
+									<TrackDataCard
+										track={currentTrack?.thumbnail_500x500}
+										name={currentTrack?.name}
+										artist={currentTrack?.artist}
+										year={currentTrack?.year}
+									/>
+								</div>
+
+								<div
+									className={`absolute top-3 left-4 right-4 transition-all duration-500 ${
+										displayQueue
+											? "translate-x-0 visible"
+											: "-translate-x-full invisible"
+									}`}
+								>
+									<QueueCard />
+								</div>
+							</div>
+
+							<div className="md:hidden flex items-center justify-evenly m-auto w-28 mt-2 bg-zinc-400 bg-opacity-15 rounded-full p-2 backdrop-blur-xl">
+								<MdOutlineQueueMusic
+									onClick={handle_view_queue}
+									className={`w-8 h-8 rounded-full p-1 ${
+										displayQueue ? "bg-zinc-700" : ""
+									}`}
+								/>
+								<MdMusicNote
+									onClick={handle_view_trackData}
+									className={`w-8 h-8 rounded-full p-1 ${
+										displayTrackData ? "bg-zinc-700" : ""
+									}`}
+								/>
+							</div>
+						</div>
+
+						<div className="w-1/2 hidden md:inline-block">
+							<QueueCard />
+						</div>
 					</div>
 				</div>
 			)}
 
+			{/* bottom bar */}
 			<div
 				className={`fixed right-1 left-1 md:right-4 md:left-4 rounded-lg
 					${
@@ -213,8 +237,10 @@ const PlayBar = () => {
 				</div>
 
 				<div
-					className={`flex h-20 items-center pr-2 pl-2 md:pr-4 md:pl-4 cursor-pointer ${
-						isFullscreen ? "justify-around" : "justify-between"
+					className={`flex h-20 items-center pr-2 pl-2 md:pr-4 md:pl-4 ${
+						isFullscreen
+							? "justify-around md:justify-between"
+							: "justify-between"
 					}`}
 				>
 					<div
@@ -274,8 +300,10 @@ const PlayBar = () => {
 						</button> */}
 					</div>
 
-					{/* playTime */}
-					<div className={`hidden md:inline-block md:w-1/3`}>
+					{/* For larger screens */}
+					<div
+						className={`hidden md:flex justify-end items-center md:w-1/3`}
+					>
 						<div className="relative flex items-center">
 							{/* <FaVolumeUp className="absolute left-0 ml-2 text-gray-500" />
 							<input
@@ -293,7 +321,37 @@ const PlayBar = () => {
 								{volume}%
 							</span> */}
 						</div>
+
+						<button
+							onClick={handle_view_sleep_timer}
+							className="flex justify-center gap-1 cursor-pointer"
+						>
+							<PiTimerBold className="w-6 h-6 " />
+							<span className="font-bold">{sleepTimer}</span>
+						</button>
+						{show_sleep_timer_menu ? (
+							<SleepTimerElem setSleepTimer={setSleepTimer} show_sleep_timer_menu={show_sleep_timer_menu} setShow_sleep_timer_menu={setShow_sleep_timer_menu} />
+						) : (
+							""
+						)}
 					</div>
+
+					{/* sleep timer button smaller screen */}
+					{isFullscreen && (
+						<button
+							onClick={handle_view_sleep_timer}
+							className="flex gap-1 absolute right-2 md:hidden"
+						>
+							<PiTimerBold className="w-6 h-6 " />
+							<span className="font-bold">{sleepTimer}</span>
+
+							{show_sleep_timer_menu ? (
+								<SleepTimerElem setSleepTimer={setSleepTimer} show_sleep_timer_menu={show_sleep_timer_menu} setShow_sleep_timer_menu={setShow_sleep_timer_menu} />
+							) : (
+								""
+							)}
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

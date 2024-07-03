@@ -42,10 +42,10 @@ function SearchResult() {
 			{isLoading ? (
 				<div className="absolute left-1/2 top-1/2 -translate-x-1/2	-translate-y-1/2">
 					<ReactLoading
-						type="cylon"
+						type="bars"
 						color="#9233EA"
-						height={200}
-						width={200}
+						height={100}
+						width={100}
 					/>
 				</div>
 			) : (

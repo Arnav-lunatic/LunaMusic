@@ -94,8 +94,9 @@ function QueueCard() {
 					.filter((elem) => elem !== queue[0])
 					.map((eachQueue, index) => {
 						return (
-							<div className="relative flex items-center justify-between scale-95">
-
+							<div
+								key={eachQueue.id}
+								className="relative flex items-center justify-between scale-95">
 								{/* invisible button because on OtherQueueElem onClick isn't working on mouse click */}
 								<button
 									onClick={() => handleClick(index + 1)}
@@ -103,7 +104,6 @@ function QueueCard() {
 								</button>
 
 								<OtherQueueElem
-									key={eachQueue.id}
 									thumbnail_50x50={eachQueue.thumbnail_50x50}
 									trackName={eachQueue.name}
 									artist={eachQueue.artist}

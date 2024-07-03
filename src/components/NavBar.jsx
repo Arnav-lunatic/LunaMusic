@@ -21,8 +21,10 @@ function NavBar({ sendValue }) {
 	};
 
 	const handleClick = () => {
-		setSearchParams({ v: searchValue })
-		search(searchValue);
+		if (searchValue) {
+			setSearchParams({ v: searchValue })
+			search(searchValue);
+		}
 	};
 
 	const handleChange = (event) => {
