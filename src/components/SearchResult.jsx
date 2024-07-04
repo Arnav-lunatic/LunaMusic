@@ -49,9 +49,9 @@ function SearchResult() {
 					/>
 				</div>
 			) : (
-				<div className="flex p-2 pt-20 pb-28 lg:flex-row flex-col gap-2 h-screen lg:overflow">
+				<div className="flex p-2 pt-20 pb-28 lg:flex-row flex-col gap-2 h-dvh lg:overflow">
 					<div className="flex items-center w-full lg:w-1/2">
-						<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg m-auto md:w-7/12">
+						<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg m-auto">
 							<div className="relative w-full">
 								<img
 									src={first_track_data[0]?.image[2].url}

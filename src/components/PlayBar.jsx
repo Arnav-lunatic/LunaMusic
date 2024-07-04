@@ -12,7 +12,7 @@ import {
 	IoPlaySkipBack,
 	IoPlaySkipForward,
 } from "react-icons/io5";
-import { RxLoop } from "react-icons/rx";
+import { RxLoop } from "react-icons/rx";	
 import { SearchContext } from "../context/SearchContext";
 import {
 	MdOutlineKeyboardArrowUp,
@@ -121,9 +121,9 @@ const PlayBar = () => {
 		setShow_sleep_timer_menu(!show_sleep_timer_menu);
 	};
 
-	// volume
-	const [volume, setVolume] = useState(50);
-	const handleVolumeChange = () => {};
+	isFullscreen ? document.getElementById('root').style.overflow = 'hidden' : document.getElementById('root').style.overflow = 'auto'
+
+
 
 	return (
 		<div
@@ -141,14 +141,14 @@ const PlayBar = () => {
 						</button>
 					</div>
 
-					<div className="flex gap-2 w-full h-full justify-around mt-10 pb-36 md:pb-0">
+					<div className="flex gap-2 w-full h-full justify-around pb-36 md:pb-0">
 						<div className="relative w-full md:w-1/2 max-w-xl p-4 md:p-10">
 							<div className="h-5/6">
 								<div
 									className={`absolute top-3 left-4 right-4 transition-all duration-500 ${
 										displayTrackData
-											? "translate-x-0 visible"
-											: "translate-x-full invisible"
+											? "translate-x-0 opacity-100"
+											: "translate-x-full opacity-0"
 									}`}
 								>
 									<TrackDataCard
@@ -162,8 +162,8 @@ const PlayBar = () => {
 								<div
 									className={`absolute top-3 left-4 right-4 transition-all duration-500 ${
 										displayQueue
-											? "translate-x-0 visible"
-											: "-translate-x-full invisible"
+											? "translate-x-0 opacity-100"
+											: "-translate-x-full opacity-0"
 									}`}
 								>
 									<QueueCard />
@@ -221,7 +221,7 @@ const PlayBar = () => {
 						type="range"
 						defaultValue="0"
 						ref={progressBarRef}
-						className={` ${
+						className={`bg-white bg-opacity-10 ${
 							isFullscreen
 								? "w-full h-2 rounded-full"
 								: "absolute left-1 right-1 top-0 rounded-t-3xl"
@@ -304,24 +304,6 @@ const PlayBar = () => {
 					<div
 						className={`hidden md:flex justify-end items-center md:w-1/3`}
 					>
-						<div className="relative flex items-center">
-							{/* <FaVolumeUp className="absolute left-0 ml-2 text-gray-500" />
-							<input
-								type="range"
-								text
-								value={volume}
-								onChange={handleVolumeChange}
-								className="w-full h-1 bg-gray-400 rounded-lg overflow-hidden no-thumb"
-								style={{
-									paddingLeft: "1.5rem",
-									paddingRight: "1.5rem",
-								}}
-							/>
-							<span className="absolute right-0 mr-2 text-gray-500 text-xs">
-								{volume}%
-							</span> */}
-						</div>
-
 						<button
 							onClick={handle_view_sleep_timer}
 							className="flex justify-center gap-1 cursor-pointer"

@@ -24,7 +24,7 @@ function App() {
 
 	const storedData = JSON.parse(localStorage.getItem('queue'))
 
-	const [queue, setQueue] = useState(storedData);
+	const [queue, setQueue] = useState(storedData? storedData : []);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const [pause, setPause] = useState(false);

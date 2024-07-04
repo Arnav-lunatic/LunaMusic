@@ -1,8 +1,45 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { SearchContext } from '../context/SearchContext';
+import { FaVolumeHigh } from "react-icons/fa6";
 
-const TrackDataCard = ({track, name, artist, year}) => {
+const TrackDataCard = ({ track, name, artist, year }) => {
+
+    const {audioRef} = useContext(SearchContext)
+
+    // volume
+    const [volume, setVolume] = useState(100);
+    const [volume_percent_visibility, setVolume_percent_visibility] = useState(false)
+
+    const handleVolumeChange = (e) => {
+        setVolume(e.target.value);
+        audioRef.current.volume = volume/100
+    };
+    
+    
+
     return (
         <div className='w-full'>
+
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value={volume}
+                onChange={handleVolumeChange}
+                onFocus={() => setVolume_percent_visibility(true)}
+                onBlur={() => setVolume_percent_visibility(false)}
+                onTouchStart={() => setVolume_percent_visibility(true)}
+                onTouchEnd={() => setVolume_percent_visibility(false)}
+                id='volume'
+                className="absolute top-44 md:top-64 -right-24 md:-right-40 transform rotate-[-90deg] appearance-none w-60 md:w-96 h-8 bg-black bg-opacity-20 backdrop-blur-lg cursor-pointer opacity-60 hover:opacity-100 transition-all duration-500 ease-in-out rounded-full shadow-lg"
+            />
+
+            <h1
+                className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl font-bold transition-all duration-1000 bg-black px-2 py-1 rounded-lg ${volume_percent_visibility ? 'opacity-80' : 'opacity-0'}`}
+            >
+                {volume}%
+            </h1>
+
             <img
                 className="rounded-t-lg w-full lg:inline-block"
                 src={track}

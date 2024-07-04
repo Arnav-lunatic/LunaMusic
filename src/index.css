@@ -25,38 +25,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #7c7c7c;
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
 	background: #7d56c1;
-}
-
-.volume {
-	height: 32px;
-	appearance: none;
-	background-color: #272727;
-	border-radius: 10px;
-	overflow: hidden;
-}
-
-.volume::-webkit-slider-thumb {
-	appearance: none;
-	width: 15px;
-	height: 32px;
-	background-color: #7d56c1;
-	box-shadow: -407px 0 0 400px #7d56c1;
-	border: none;
-}
-
-.volume::-moz-range-thumb {
-	appearance: none;
-	width: 15px;
-	height: 32px;
-	background-color: #7d56c1;
-	box-shadow: -407px 0 0 400px #7d56c1;
-	border: none;
 }
 
 input[type="range"] {
@@ -74,14 +47,12 @@ input[type="range"] {
 /* Track: webkit browsers */
 input[type="range"]::-webkit-slider-runnable-track {
 	height: 3px;
-	background: #ccc;
 	border-radius: 16px;
 }
 
 /* Track: Mozilla Firefox */
 input[type="range"]::-moz-range-track {
 	height: 5px;
-	background: #ccc;
 	border-radius: 16px;
 }
 
@@ -92,21 +63,52 @@ input[type="range"]::-webkit-slider-thumb {
 	appearance: none;
 	/* creating a custom design */
 	height: 5px;
-	width: 5px;
-	background-color: #9233ea;
+	width: 5px;	
+	background-color: #9233EA;
 	border-radius: 50%;
-	border: 2px solid #9233ea;
+	border: 2px solid #9233EA;
 	/*  slider progress trick  */
-	box-shadow: -100vw 0 0 100vw #7d56c1;
+	box-shadow: -100vw 0 0 100vw #9233EA;
 }
 
 /* Thumb: Firefox */
 input[type="range"]::-moz-range-thumb {
 	height: 15px;
 	width: 15px;
-	background-color: #9233ea;
+	background-color: #9233EA;
 	border-radius: 50%;
-	border: 1px solid #9233ea;
+	border: 1px solid #9233EA;
 	/*  slider progress trick  */
-	box-shadow: -407px 0 0 400px #7d56c1;
+	box-shadow: -407px 0 0 400px #9233EA;
+}
+
+#volume {
+	background-image: url('/src/assets/volume.png');
+	background-position: 5px 5px; 
+	background-repeat: no-repeat;
+
+}
+#volume::-webkit-slider-thumb {
+	background-color: #ffffff88;
+	border: 1px solid #ffffff88;
+	box-shadow: -407px 0 0 400px #ffffff88;
+}
+
+#volume::-moz-range-thumb {
+	background-color: #ffffff88;
+	border: 1px solid #ffffff88;
+	box-shadow: -407px 0 0 400px #ffffff88;
+}
+
+#volume::-webkit-slider-thumb {
+	background-color: #ffffff88;
+	border: 2px solid #ffffff88;
+	box-shadow: -100vw 0 0 100vw #ffffff88;
+}
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+	background-color: #ffffff88;
+	border: 1px solid #ffffff88;
+	box-shadow: -407px 0 0 400px #ffffff88;
 }

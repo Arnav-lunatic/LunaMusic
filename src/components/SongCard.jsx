@@ -13,7 +13,7 @@ const SongCard = ({
 	const playCount = track_data.playCount !== null ? track_data.playCount.toLocaleString() : ""
 
 	return (
-		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg xl:max-w-3xl">
+		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg xl:max-w-2xl">
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
