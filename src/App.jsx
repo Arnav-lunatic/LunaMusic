@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { NavBar, PlayBar } from "./components";
 import { Outlet } from "react-router-dom";
 import { SearchContext } from "./context/SearchContext";
@@ -9,6 +9,7 @@ import default_thumbnail_50x50 from "/src/assets/default_thumbnail_50x50.jpg";
 import default_thumbnail_500x500 from "/src/assets/default_thumbnail_500x500.jpg";
 
 function App() {
+
 	const [searchData, setSearchData] = useState([]);
 	const [currentTrack, setCurrentTrack] = useState({
 		path: "/src/assets/default.wav",
@@ -20,7 +21,10 @@ function App() {
 		year: 2024,
 		duration: 0,
 	});
-	const [queue, setQueue] = useState([]);
+
+	const storedData = JSON.parse(localStorage.getItem('queue'))
+
+	const [queue, setQueue] = useState(storedData);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const [pause, setPause] = useState(false);
@@ -33,6 +37,12 @@ function App() {
 			sec / 60 < 10 ? "0" + Math.floor(sec / 60) : Math.floor(sec / 60)
 		}:${sec % 60 < 10 ? "0" + Math.floor(sec % 60) : Math.floor(sec % 60)}`;
 	};
+
+	// Local Storage
+	useEffect(() => {
+		localStorage.setItem('queue', JSON.stringify(queue))
+	}, [queue])
+
 
 	// media session in navigation
 	
