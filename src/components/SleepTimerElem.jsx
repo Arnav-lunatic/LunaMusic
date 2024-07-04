@@ -43,6 +43,7 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
         }, totalTime);
 
         setSleepTimer(time + ' Mins')   
+        setShow_sleep_timer_menu(false);
     }
 
     

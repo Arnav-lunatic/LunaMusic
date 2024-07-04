@@ -3,10 +3,10 @@ import { NavBar, PlayBar } from "./components";
 import { Outlet } from "react-router-dom";
 import { SearchContext } from "./context/SearchContext";
 import { Tooltip } from "react-tooltip";
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
-import default_thumbnail_50x50 from '/src/assets/default_thumbnail_50x50.jpg'
-import default_thumbnail_500x500 from '/src/assets/default_thumbnail_500x500.jpg'
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
+import default_thumbnail_50x50 from "/src/assets/default_thumbnail_50x50.jpg";
+import default_thumbnail_500x500 from "/src/assets/default_thumbnail_500x500.jpg";
 
 function App() {
 	const [searchData, setSearchData] = useState([]);
@@ -20,19 +20,57 @@ function App() {
 		year: 2024,
 		duration: 0,
 	});
-	const [queue, setQueue] = useState([])
-	const [isLoading, setIsLoading] = useState(true)
+	const [queue, setQueue] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
-	const progressBarRef = useRef()
+	const progressBarRef = useRef();
 
 	// API provides playCount in sec, this function will convert it mins i.e. ex- 03:09
 	const convertIntoMin = (sec) => {
-		return `${(sec / 60 < 10) ? "0" + Math.floor(sec / 60) : Math.floor(sec / 60)}:${
-			(sec % 60 < 10) ? "0" + Math.floor(sec % 60) : Math.floor(sec % 60)
-		}`;
+		return `${
+			sec / 60 < 10 ? "0" + Math.floor(sec / 60) : Math.floor(sec / 60)
+		}:${sec % 60 < 10 ? "0" + Math.floor(sec % 60) : Math.floor(sec % 60)}`;
 	};
+
+	// media session in navigation
+	
+	if ("mediaSession" in navigator) {
+		navigator.mediaSession.metadata = new MediaMetadata({
+			title: currentTrack.name,
+			artist: currentTrack.artist,
+			album: "Luna Music",
+			artwork: [
+				{
+					src: currentTrack.thumbnail_50x50,
+					sizes: "50x50",
+					type: "image/png",
+				},
+				{
+					src: currentTrack.thumbnail_500x500,
+					sizes: "500x500",
+					type: "image/png",
+				},
+			],
+		});
+
+		navigator.mediaSession.setActionHandler("play", () => setPause(true));
+		navigator.mediaSession.setActionHandler("pause", () => setPause(false));
+
+		navigator.mediaSession.setActionHandler("previoustrack", () => {
+			let queueContainer = [...queue];
+			let queue_without_first_elem = queueContainer.pop();
+			queueContainer.unshift(queue_without_first_elem);
+			setQueue(queueContainer);
+		});
+		navigator.mediaSession.setActionHandler("nexttrack", () => {
+			let queueContainer = [...queue];
+			let queue_without_first_elem = queueContainer.shift();
+			queueContainer.push(queue_without_first_elem);
+			setQueue(queueContainer);
+		});
+	}
 
 	return (
 		<SearchContext.Provider
@@ -55,7 +93,7 @@ function App() {
 			<Outlet />
 			<PlayBar />
 			<Analytics />
-			<SpeedInsights/>
+			<SpeedInsights />
 			<Tooltip
 				id="my-tooltip"
 				style={{
