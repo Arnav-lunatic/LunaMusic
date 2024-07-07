@@ -9,7 +9,6 @@ import default_thumbnail_50x50 from "/src/assets/default_thumbnail_50x50.jpg";
 import default_thumbnail_500x500 from "/src/assets/default_thumbnail_500x500.jpg";
 
 function App() {
-
 	const [searchData, setSearchData] = useState([]);
 	const [currentTrack, setCurrentTrack] = useState({
 		path: "/src/assets/default.wav",
@@ -22,9 +21,20 @@ function App() {
 		duration: 0,
 	});
 
-	const storedData = JSON.parse(localStorage.getItem('queue'))
+	const storedQueue = JSON.parse(localStorage.getItem("queue"));
+	const storedSavedPlaylist = JSON.parse(
+		localStorage.getItem("savedPlaylist")
+	);
 
-	const [queue, setQueue] = useState(storedData? storedData : []);
+	const [queue, setQueue] = useState(storedQueue ? storedQueue : []);
+
+
+	const [savedPlaylist, setSavedPlaylist] = useState(
+		storedSavedPlaylist ? storedSavedPlaylist : []
+	);
+	
+	
+
 	const [isLoading, setIsLoading] = useState(true);
 
 	const [pause, setPause] = useState(false);
@@ -40,12 +50,12 @@ function App() {
 
 	// Local Storage
 	useEffect(() => {
-		localStorage.setItem('queue', JSON.stringify(queue))
-	}, [queue])
-
+		localStorage.setItem("queue", JSON.stringify(queue));
+		localStorage.setItem("savedPlaylist", JSON.stringify(savedPlaylist));
+	}, [queue, savedPlaylist]);
 
 	// media session in navigation
-	
+
 	if ("mediaSession" in navigator) {
 		navigator.mediaSession.metadata = new MediaMetadata({
 			title: currentTrack.name,
@@ -95,6 +105,8 @@ function App() {
 				progressBarRef,
 				queue,
 				setQueue,
+				savedPlaylist,
+				setSavedPlaylist,
 				isLoading,
 				setIsLoading,
 			}}
@@ -106,6 +118,7 @@ function App() {
 			<SpeedInsights />
 			<Tooltip
 				id="my-tooltip"
+				className="invisible md:visible"
 				style={{
 					backgroundColor: "#ffffff",
 					color: "#222222",

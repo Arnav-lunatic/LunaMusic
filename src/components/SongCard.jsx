@@ -8,6 +8,7 @@ import { SearchContext } from "../context/SearchContext";
 const SongCard = ({
 	track_data,
 	add_to_queue,
+	add_to_save
 }) => {
 	const {convertIntoMin} = useContext(SearchContext)
 	const playCount = track_data.playCount !== null ? track_data.playCount.toLocaleString() : ""
@@ -53,11 +54,12 @@ const SongCard = ({
 			</div>
 
 			<div className="flex font-semibold items-center text-sm md:text-lg">
-				<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
+				<button
+					onClick={() => add_to_save(track_data)}
+					className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
 					<FaRegSave className="h-5 w-5" />
 					<p>
-						Coming Soon
-						{/* Add to Save */}
+						Add to Save
 					</p>
 				</button>
 				<div className="font-extralight text-xl md:text-3xl">|</div>

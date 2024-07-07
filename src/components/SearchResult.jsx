@@ -17,6 +17,8 @@ function SearchResult() {
 		setCurrentTrack,
 		queue,
 		setQueue,
+		savedPlaylist,
+		setSavedPlaylist,
 		isLoading,
 	} = useContext(SearchContext);
 
@@ -35,6 +37,20 @@ function SearchResult() {
 		};
 		setQueue((queue) => [...queue, newItemObj]);
 		queue.length === 0 ? setCurrentTrack(newItemObj) : "";
+	};
+
+	const add_to_save = (newItem) => {
+		const newItemObj = {
+			id: newItem.id,
+			path: newItem.downloadUrl[4].url,
+			name: newItem.name,
+			thumbnail_50x50: newItem.image[1].url,
+			thumbnail_500x500: newItem.image[2].url,
+			artist: newItem.artists.primary[0].name,
+			year: newItem.year,
+			duration: newItem.duration,
+		};
+		setSavedPlaylist((queue) => [...queue, newItemObj]);
 	};
 
 	return (
@@ -110,12 +126,14 @@ function SearchResult() {
 								</div>
 							</div>
 							<div className="flex font-semibold items-center text-sm md:text-lg">
-								<button className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
+								<button
+									onClick={() =>
+										add_to_save(first_track_data[0])
+									}
+									className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md"
+								>
 									<FaRegSave className="h-5 w-5" />
-									<p>
-										Coming Soon
-										{/* Add to Save */}
-									</p>
+									<p>Add to Save</p>
 								</button>
 								<div className="font-extralight text-xl md:text-3xl">
 									|
@@ -153,6 +171,7 @@ function SearchResult() {
 										track_data={other_track_data}
 										key={other_track_data.id}
 										add_to_queue={add_to_queue}
+										add_to_save={add_to_save}
 									/>
 								);
 							})}

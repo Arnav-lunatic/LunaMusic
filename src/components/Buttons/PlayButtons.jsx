@@ -3,7 +3,7 @@ import { SearchContext } from "../../context/SearchContext";
 import { FaPlay } from "react-icons/fa";
 
 function PlayButtons({
-	tooltipPosition,
+	tooltipPosition='bottom',
 	getTrackData,
 }) {
 	const {setCurrentTrack, setPause, setQueue } =

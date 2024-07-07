@@ -34,16 +34,17 @@ function QueueCard() {
 		thumbnail_50x50,
 		trackName,
 		artist,
-		delete_this_track,
-		play_this_track,
+		index
 	}) => {
 		return (
 			<div
-				onClick={play_this_track}
 				className="flex items-center gap-4 justify-start w-full pb-4 cursor-pointer"
 			>
+				<h1 className="absolute -left-2 text-4xl md:text-6xl drop-shadow-lg font-bold ">
+					{index}
+				</h1>
 				<img
-					className="h-16 w-16 rounded-lg"
+					className="ml-2 md:ml-6 h-16 w-16 rounded-lg"
 					src={thumbnail_50x50}
 					alt="thumbnail 50x50"
 				/>
@@ -89,7 +90,7 @@ function QueueCard() {
 					Queue is Empty
 				</h1>
 			)}
-			<div className="h-96 overflow-y-auto">
+			<div className="h-[55vh] overflow-y-auto">
 				{queue
 					.filter((elem) => elem !== queue[0])
 					.map((eachQueue, index) => {
@@ -107,6 +108,7 @@ function QueueCard() {
 									thumbnail_50x50={eachQueue.thumbnail_50x50}
 									trackName={eachQueue.name}
 									artist={eachQueue.artist}
+									index={index+2}
 								/>
 								
 								<button

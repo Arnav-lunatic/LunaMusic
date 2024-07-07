@@ -31,7 +31,7 @@ const TrackDataCard = ({ track, name, artist, year }) => {
                 onTouchStart={() => setVolume_percent_visibility(true)}
                 onTouchEnd={() => setVolume_percent_visibility(false)}
                 id='volume'
-                className="absolute top-44 md:top-64 -right-24 md:-right-40 transform rotate-[-90deg] appearance-none w-60 md:w-96 h-8 bg-black bg-opacity-20 backdrop-blur-lg cursor-pointer opacity-60 hover:opacity-100 transition-all duration-500 ease-in-out rounded-full shadow-lg"
+                className="absolute top-44 md:top-64 -right-24 md:-right-40 transform rotate-[-90deg] appearance-none w-60 md:w-96 h-8 bg-black bg-opacity-40 backdrop-blur-lg cursor-pointer opacity-60 hover:opacity-100 hover:bg-opacity-60 transition-all duration-500 ease-in-out rounded-lg shadow-lg"
             />
 
             <h1
