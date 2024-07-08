@@ -7,11 +7,12 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import default_thumbnail_50x50 from "/src/assets/default_thumbnail_50x50.jpg";
 import default_thumbnail_500x500 from "/src/assets/default_thumbnail_500x500.jpg";
+import defaultTrackPath from "/src/assets/default.wav"
 
 function App() {
 	const [searchData, setSearchData] = useState([]);
 	const [currentTrack, setCurrentTrack] = useState({
-		path: "/src/assets/default.wav",
+		path: defaultTrackPath,
 		id: 1,
 		name: "No track found",
 		thumbnail_50x50: default_thumbnail_50x50,

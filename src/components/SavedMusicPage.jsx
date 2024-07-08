@@ -16,8 +16,8 @@ function SavedMusicPage() {
 	}
 
 	const handlePlayAll = () => {
-		setPause(true);
 		setQueue(savedPlaylist);
+		setPause(true);
 	};
 
 	const handleShuffle = () => {

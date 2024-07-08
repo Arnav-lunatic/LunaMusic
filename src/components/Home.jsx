@@ -1,19 +1,16 @@
-import React, { useContext, useState } from "react";
-import { SearchContext } from "../context/SearchContext";
-import PlaylistView from "./SavedMusicPage";
+import React from "react";
 import { Link } from "react-router-dom";
+import savedPlaylistIcon from "/src/assets/saved.png"
 
 function Home() {
-	
-	const [viewPlaylist, setViewPlaylist] = useState(false)
 
 	return (
 		<div className="py-20 max-w-6xl m-auto">
 			<Link to='/playlist/saved-music'>
 				<div
 					className="grid justify-items-center hover:bg-black w-fit hover:bg-opacity-30 px-4 py-2 rounded-lg bg-red">
-					<img src="/src/assets/saved.png" />
-					<p className="font-semibold">Save Playlist</p>
+					<img src={savedPlaylistIcon} />
+					<p className="font-semibold">Saved Playlist</p>
 				</div>
 			</Link>
 

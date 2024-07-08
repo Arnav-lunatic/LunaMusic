@@ -54,7 +54,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Track: Mozilla Firefox */
 input[type="range"]::-moz-range-track {
-	height: 5px;
+	height: 3px;
 	border-radius: 16px;
 }
 
@@ -75,13 +75,14 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Thumb: Firefox */
 input[type="range"]::-moz-range-thumb {
-	height: 15px;
-	width: 15px;
+	appearance: none;
+	height: 5px;
+	width: 5px;
 	background-color: #9233EA;
 	border-radius: 50%;
-	border: 1px solid #9233EA;
+	border: 2px solid #9233EA;
 	/*  slider progress trick  */
-	box-shadow: -407px 0 0 400px #9233EA;
+	box-shadow: -100vw 0 0 100vw #9233EA;
 }
 
 #volume {

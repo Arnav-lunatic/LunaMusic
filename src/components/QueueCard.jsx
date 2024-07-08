@@ -30,16 +30,9 @@ function QueueCard() {
 		);
 	};
 
-	const OtherQueueElem = ({
-		thumbnail_50x50,
-		trackName,
-		artist,
-		index
-	}) => {
+	const OtherQueueElem = ({ thumbnail_50x50, trackName, artist, index }) => {
 		return (
-			<div
-				className="flex items-center gap-4 justify-start w-full pb-4 cursor-pointer"
-			>
+			<div className="flex items-center gap-4 justify-start w-full pb-4 cursor-pointer">
 				<h1 className="absolute -left-2 text-4xl md:text-6xl drop-shadow-lg font-bold ">
 					{index}
 				</h1>
@@ -76,8 +69,11 @@ function QueueCard() {
 
 	return (
 		<div className="w-full h-4/5 md:p-10">
-			{/* component in same file	 */}
-			{queue.length !== 0 ? (
+			{queue.length === 1 ? (
+				<h1 className="text-2xl font-bold text-center">
+					Queue is Empty
+				</h1>
+			) : (
 				<div>
 					<FirstQueueElem
 						thumbnail_50x50={queue[0].thumbnail_50x50}
@@ -85,10 +81,6 @@ function QueueCard() {
 						artist={queue[0].artist}
 					/>
 				</div>
-			) : (
-				<h1 className="text-2xl font-bold text-center">
-					Queue is Empty
-				</h1>
 			)}
 			<div className="h-[55vh] overflow-y-auto">
 				{queue
@@ -97,20 +89,21 @@ function QueueCard() {
 						return (
 							<div
 								key={eachQueue.id}
-								className="relative flex items-center justify-between scale-95">
+								className="relative flex items-center justify-between scale-95"
+							>
 								{/* invisible button because on OtherQueueElem onClick isn't working on mouse click */}
 								<button
 									onClick={() => handleClick(index + 1)}
-									className="absolute top-0 bottom-0 right-10 left-0 z-10">
-								</button>
+									className="absolute top-0 bottom-0 right-10 left-0 z-10"
+								></button>
 
 								<OtherQueueElem
 									thumbnail_50x50={eachQueue.thumbnail_50x50}
 									trackName={eachQueue.name}
 									artist={eachQueue.artist}
-									index={index+2}
+									index={index + 2}
 								/>
-								
+
 								<button
 									onClick={() => handleDelete(index + 1)}
 									className="w-8 h-8 cursor-pointer"

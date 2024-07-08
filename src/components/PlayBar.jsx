@@ -79,6 +79,10 @@ const PlayBar = () => {
 	};
 
 	const play_next_track = () => {
+		if (queue.length === 1) {
+			setPause((e) => !e)			
+			return
+		}
 		let queueContainer = [...queue];
 		let queue_without_first_elem = queueContainer.shift();
 		queueContainer.push(queue_without_first_elem);
@@ -224,7 +228,7 @@ const PlayBar = () => {
 						className={`bg-white bg-opacity-10 ${
 							isFullscreen
 								? "w-full h-2 rounded-full"
-								: "absolute left-1 right-1 top-0 rounded-t-3xl"
+								: "absolute h-1 left-1 right-1 top-0 rounded-t-3xl"
 						} `}
 						onChange={() => {
 							audioRef.current.currentTime =
