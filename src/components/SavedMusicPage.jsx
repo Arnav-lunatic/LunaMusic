@@ -17,7 +17,7 @@ function SavedMusicPage() {
 
 	const handlePlayAll = () => {
 		setQueue(savedPlaylist);
-		setPause(true);
+		setPause(true);					
 	};
 
 	const handleShuffle = () => {
@@ -39,7 +39,7 @@ function SavedMusicPage() {
 					return (
 						<div
 							key={index}
-							className="flex justify-between items-center rounded-lg bg-zinc-800 bg-opacity-30 px-2 py-1 max-w-7xl my-3 mx-2 md:mx-auto"
+							className="flex justify-between items-center rounded-lg bg-zinc-900 bg-opacity-20 px-2 py-1 max-w-7xl my-3 mx-2 md:mx-auto"
 						>
 							<div className="flex items-center gap-4">
 								<img
@@ -70,7 +70,7 @@ function SavedMusicPage() {
 	};
 
 	return (
-		<div className="absolute top-20 bottom-20 left-1/2 w-[95vw] max-w-6xl -translate-x-1/2 overflow-y-auto rounded-t-xl">
+		<div className="absolute top-20 bottom-24 left-1/2 w-[95vw] max-w-6xl -translate-x-1/2 overflow-y-auto rounded-xl bg-black bg-opacity-40 backdrop-blur-lg p-2 md:p-6">
 			<div className=" flex items-start">
 				<PlaylistThumbnail data={savedPlaylist} />
 				<div className="grid ml-4 gap-8">

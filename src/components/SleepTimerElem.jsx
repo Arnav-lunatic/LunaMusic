@@ -3,8 +3,7 @@ import { SearchContext } from "../context/SearchContext";
 
 function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_timer_menu}) {
 
-    const {setPause, audioRef} = useContext(SearchContext)
-    
+    const {setPause} = useContext(SearchContext)    
 
 	const SleepTimerButton = ({ text }) => {
 		return (
@@ -16,8 +15,8 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
 		);
     };
 
+    // Below useEffect hook close the popup on click outside the popup
     const sleepTimerRef = useRef()
-    
     useEffect(() => {
         const handler = (event) => {
             if (show_sleep_timer_menu && sleepTimerRef.current && !sleepTimerRef.current.contains(event.target)) {
@@ -33,7 +32,7 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
         };
     }, [show_sleep_timer_menu]);
 
-    const buttonContent = ['Off', 10, 20, 30, 45, /*"Custom"*/];
+    const buttonContent = ['Off', 10, 20, 30, 45, 60 /*"Custom"*/];
     
     const handleClick = (time) => {
         const totalTime = time * 60 * 1000
@@ -45,10 +44,6 @@ function SleepTimerElem({setSleepTimer, show_sleep_timer_menu, setShow_sleep_tim
         setSleepTimer(time + ' Mins')   
         setShow_sleep_timer_menu(false);
     }
-
-    
-
-    // Animation
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchContext } from "../context/SearchContext";
 import SongCard from "./SongCard";
 import DownloadButtons from "./Buttons/DownloadButtons";
@@ -14,20 +14,23 @@ function SearchResult() {
 	const {
 		searchData,
 		convertIntoMin,
+		currentTrack,
 		setCurrentTrack,
 		queue,
 		setQueue,
-		savedPlaylist,
+		playingQuality,
+		downloadQuality,
 		setSavedPlaylist,
 		isLoading,
 	} = useContext(SearchContext);
+
 
 	const first_track_data = searchData.data?.results;
 
 	const add_to_queue = (newItem) => {
 		const newItemObj = {
 			id: newItem.id,
-			path: newItem.downloadUrl[4].url,
+			path: newItem.downloadUrl[playingQuality].url,
 			name: newItem.name,
 			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
@@ -42,7 +45,7 @@ function SearchResult() {
 	const add_to_save = (newItem) => {
 		const newItemObj = {
 			id: newItem.id,
-			path: newItem.downloadUrl[4].url,
+			path: newItem.downloadUrl[playingQuality].url,
 			name: newItem.name,
 			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
@@ -52,6 +55,12 @@ function SearchResult() {
 		};
 		setSavedPlaylist((queue) => [...queue, newItemObj]);
 	};
+
+	useEffect(() => {
+		console.log('playingQuality', playingQuality);
+		console.log('downloadQuality', downloadQuality);
+	}, [currentTrack])
+	
 
 	return (
 		<>
@@ -107,7 +116,7 @@ function SearchResult() {
 											tooltipPosition={"right"}
 											fileToDownload={
 												first_track_data[0]
-													?.downloadUrl[4].url
+													?.downloadUrl[downloadQuality].url
 											}
 											fileTitle={
 												first_track_data[0]?.name

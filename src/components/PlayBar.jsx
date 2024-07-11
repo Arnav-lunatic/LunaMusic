@@ -125,9 +125,12 @@ const PlayBar = () => {
 		setShow_sleep_timer_menu(!show_sleep_timer_menu);
 	};
 
-	isFullscreen ? document.getElementById('root').style.overflow = 'hidden' : document.getElementById('root').style.overflow = 'auto'
-
-
+	if (isFullscreen) {
+		document.getElementById('root').style.overflow = 'hidden'
+	} else {
+		document.getElementById('root').style.overflow = 'auto'
+	}
+	
 
 	return (
 		<div

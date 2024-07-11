@@ -8,7 +8,11 @@
 	font-weight: 400;
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
-	background-image: url("/src/assets/bg.jpg");
+	background-image: var(--bodyBg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -18,16 +22,15 @@
 }
 
 ::-webkit-scrollbar {
-	height: 6px;
-	width: 4px;
+	height: 8px;
+	width: 6px;
 }
 
-::-webkit-scrollbar-track {
-	background: transparent;
-}
+
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 4px;
+	background: #747474d8;
 }
 
 ::-webkit-scrollbar-thumb:hover {

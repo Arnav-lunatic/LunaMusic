@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { MdHome } from "react-icons/md";
 import { SearchContext } from "../context/SearchContext";
 
 function NavBar({ sendValue }) {
 	const [searchParams, setSearchParams] = useSearchParams()
+	const { setIsLoading, show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef } = useContext(SearchContext)
+	const navigate = useNavigate()
+
 	const searchParamsValue = searchParams.get("v")
 	const [searchValue, setSearchValue] = useState(searchParamsValue || '')
-	const {setIsLoading} = useContext(SearchContext)
 
-	const navigate = useNavigate()
 
 	const search = (getSearch) => {
 		setIsLoading(true)
@@ -36,11 +36,21 @@ function NavBar({ sendValue }) {
 		handleClick()
 	}, []);
 
+	const handle_sidebar_menu = () => {
+		setShow_sidebar_menu((val) => !val)
+	} 
+
 	return (
 		<div className="absolute m-auto top-1 right-1 left-1 md:right-4 md:left-4 flex justify-between pr-1 pl-2 md:pr-4 md:pl-4 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg">
-			<button onClick={() => navigate('/')}>
-				<MdHome className="w-10 h-10" />
+			<button
+				ref={sideBarButtonRef}
+				className="flex flex-col gap-[7px] justify-center"
+				onClick={handle_sidebar_menu}>
+				<div className={`w-[40px] h-[7px] bg-white rounded-lg origin-left transition-all duration-500 ${show_sidebar_menu? 'rotate-45' : 'rotate-0'}`}></div>
+				<div className={`w-[40px] h-[7px] bg-white rounded-lg origin-left transition-all duration-500 ${show_sidebar_menu? 'opacity-0' : 'opacity-100'}`}></div>
+				<div className={`w-[40px] h-[7px] bg-white rounded-lg origin-left transition-all duration-500 ${show_sidebar_menu? '-rotate-45' : 'rotate-0'}`}></div>
 			</button>
+			
 			<div className="flex items-center m-2">
 				<input
 					type="text"
@@ -53,7 +63,7 @@ function NavBar({ sendValue }) {
 							handleClick();
 						}
 					}}
-					className="p-2 w-screen max-w-52 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
+					className="p-2 w-screen max-w-64 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
 				/>
 
 				<Link to={`/search?v=${searchParamsValue}`} className="flex items-center ">

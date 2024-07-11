@@ -10,7 +10,7 @@ const SongCard = ({
 	add_to_queue,
 	add_to_save
 }) => {
-	const {convertIntoMin} = useContext(SearchContext)
+	const {convertIntoMin, playingQuality, downloadQuality,} = useContext(SearchContext)
 	const playCount = track_data.playCount !== null ? track_data.playCount.toLocaleString() : ""
 
 	return (
@@ -42,12 +42,12 @@ const SongCard = ({
 				<div className="flex gap-2 items-center">
 					<DownloadButtons
 						tooltipPosition={"bottom"}
-						fileToDownload={track_data.downloadUrl[4].url}
+						fileToDownload={track_data.downloadUrl[downloadQuality].url}
 						fileTitle={track_data.name}
 					/>
 					<PlayButtons
 						tooltipPosition={"bottom"}
-						songToPlay={track_data.downloadUrl[4].url}
+						songToPlay={track_data.downloadUrl[playingQuality].url}
 						getTrackData={track_data}
 					/>
 				</div>
