@@ -6,17 +6,17 @@ function PlayButtons({
 	tooltipPosition='bottom',
 	getTrackData,
 }) {
-	const {setCurrentTrack, setPause, setQueue } =
+	const {setCurrentTrack, setPause, setQueue, playingQuality, downloadQuality } =
 		useContext(SearchContext);
 
 	// When any play any particular track, this will set the track data in playBar
-	const song_to_play = getTrackData?.downloadUrl[4].url
 	
 	const playMusic = () => {
 		setPause(true);
 		setCurrentTrack({
 			id: getTrackData.id,
-			path: song_to_play ,
+			path: getTrackData?.downloadUrl[playingQuality].url,
+			downloadPath: getTrackData?.downloadUrl[downloadQuality].url,
 			name: getTrackData.name,
 			thumbnail_50x50: getTrackData.image[1].url,
 			thumbnail_500x500: getTrackData.image[2].url,
@@ -26,7 +26,8 @@ function PlayButtons({
 		});
 		setQueue([{
 			id: getTrackData.id,
-			path: song_to_play ,
+			path: getTrackData?.downloadUrl[playingQuality].url,
+			downloadPath: getTrackData?.downloadUrl[downloadQuality].url,
 			name: getTrackData.name,
 			thumbnail_50x50: getTrackData.image[1].url,
 			thumbnail_500x500: getTrackData.image[2].url,

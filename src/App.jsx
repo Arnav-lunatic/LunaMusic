@@ -12,6 +12,7 @@ function App() {
 	const [searchData, setSearchData] = useState([]);
 	const [currentTrack, setCurrentTrack] = useState({
 		path: defaultTrackPath,
+		downloadPath: defaultTrackPath,
 		id: 1,
 		name: "No track found",
 		thumbnail_50x50: default_thumbnail_50x50,

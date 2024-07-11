@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { bg, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9 } from ".";
+import { bg, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13 } from ".";
 import { SearchContext } from "../context/SearchContext";
 import QualitySelector from "./QualitySelector";
 
@@ -53,7 +53,11 @@ function Setting() {
 		{ name: "Anime", bg: bg6 },
 		{ name: "Blade Runner", bg: bg7 },
 		{ name: "Classic", bg: bg8 },
-		{ name: "Star Wars", bg: bg9 },
+		{ name: "Star Wars 1", bg: bg9 },
+		{ name: "Galaxy", bg: bg10 },
+		{ name: "Star Wars 2", bg: bg11 },
+		{ name: "Doreamon", bg: bg12 },
+		{ name: "Foggy		", bg: bg13 },
 	];
 
 	return (

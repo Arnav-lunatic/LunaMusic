@@ -31,7 +31,7 @@ const SongCard = ({
 						{track_data.name}
 					</h2>
 					<p className="text-gray-400 max-w-36 md:max-w-xs truncate">
-						{track_data.artists.primary[0].name}
+						{track_data.artists.primary[0]?.name}
 					</p>
 				</div>
 				<div className="hidden md:flex flex-col items-end ml-4">

@@ -158,12 +158,7 @@ const PlayBar = () => {
 											: "translate-x-full opacity-0"
 									}`}
 								>
-									<TrackDataCard
-										track={currentTrack?.thumbnail_500x500}
-										name={currentTrack?.name}
-										artist={currentTrack?.artist}
-										year={currentTrack?.year}
-									/>
+									<TrackDataCard />
 								</div>
 
 								<div
@@ -265,7 +260,7 @@ const PlayBar = () => {
 								alt="img"
 							/>
 							<div className="flex flex-col w-full">
-								<span className="text-sm w-48 md:text-lg md:truncate font-semibold">
+								<span className="text-sm max-w-48 lg:max-w-lg md:text-lg truncate font-semibold">
 									{currentTrack?.name}
 								</span>
 								<span className="text-xs w-48 md:text-sm">
@@ -349,7 +344,3 @@ const PlayBar = () => {
 };
 
 export default PlayBar;
-
-{
-	/*  */
-}

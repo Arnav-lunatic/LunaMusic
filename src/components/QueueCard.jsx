@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext} from "react";
 import { SearchContext } from "../context/SearchContext";
 import { TiDelete } from "react-icons/ti";
 
@@ -7,7 +7,7 @@ function QueueCard() {
 
 	const FirstQueueElem = ({ thumbnail_50x50, trackName, artist }) => {
 		return (
-			<div className="flex items-start w-full bg-zinc-400 bg-opacity-15 rounded-lg p-2 backdrop-blur-xl mb-4 shadow-sm shadow-gray-700">
+			<div className="flex items-center w-full bg-zinc-400 bg-opacity-15 rounded-lg p-2 backdrop-blur-xl mb-4 shadow-sm shadow-gray-700">
 				<div className="flex items-center gap-4 justify-start w-full">
 					<img
 						className="h-16 w-16 rounded-lg"
@@ -15,17 +15,16 @@ function QueueCard() {
 						alt="thumbnail 50x50"
 					/>
 					<div>
-						<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-full">
+						<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-md">
 							{trackName}
 						</h1>
-						<h1 className="text-sm max-w-60 truncate md:max-w-full">
+						<h1 className="text-sm max-w-60 truncate md:max-w-md">
 							{artist}
 						</h1>
 					</div>
 				</div>
-				{/* <button className="flex gap-1 rounded-lg p-2 hover:bg-white hover:bg-opacity-10 transition-all ">
-                    <FaRegSave className="w-6 h-6" />
-                </button> */}
+
+				
 			</div>
 		);
 	};
@@ -42,10 +41,10 @@ function QueueCard() {
 					alt="thumbnail 50x50"
 				/>
 				<div>
-					<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-full">
+					<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-md">
 						{trackName}
 					</h1>
-					<h1 className="text-sm max-w-60 truncate md:max-w-full">
+					<h1 className="text-sm max-w-60 truncate md:max-w-md">
 						{artist}
 					</h1>
 				</div>
@@ -88,7 +87,7 @@ function QueueCard() {
 					.map((eachQueue, index) => {
 						return (
 							<div
-								key={eachQueue.id}
+								key={index}
 								className="relative flex items-center justify-between scale-95"
 							>
 								{/* invisible button because on OtherQueueElem onClick isn't working on mouse click */}

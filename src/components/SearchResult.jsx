@@ -14,7 +14,6 @@ function SearchResult() {
 	const {
 		searchData,
 		convertIntoMin,
-		currentTrack,
 		setCurrentTrack,
 		queue,
 		setQueue,
@@ -31,6 +30,7 @@ function SearchResult() {
 		const newItemObj = {
 			id: newItem.id,
 			path: newItem.downloadUrl[playingQuality].url,
+			downloadPath: newItem.downloadUrl[downloadQuality].url,
 			name: newItem.name,
 			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
@@ -46,6 +46,7 @@ function SearchResult() {
 		const newItemObj = {
 			id: newItem.id,
 			path: newItem.downloadUrl[playingQuality].url,
+			downloadPath: newItem.downloadUrl[downloadQuality].url,
 			name: newItem.name,
 			thumbnail_50x50: newItem.image[1].url,
 			thumbnail_500x500: newItem.image[2].url,
@@ -54,13 +55,7 @@ function SearchResult() {
 			duration: newItem.duration,
 		};
 		setSavedPlaylist((queue) => [...queue, newItemObj]);
-	};
-
-	useEffect(() => {
-		console.log('playingQuality', playingQuality);
-		console.log('downloadQuality', downloadQuality);
-	}, [currentTrack])
-	
+	};	
 
 	return (
 		<>
@@ -80,8 +75,8 @@ function SearchResult() {
 							<div className="relative w-full">
 								<img
 									src={first_track_data[0]?.image[2].url}
-									alt="Song Art"
-									className="rounded-lg w-full min-w-48"
+									alt="Track thumbnail"
+									className="rounded-lg w-full min-w-48 min-h-lg"
 								/>
 								<div className="absolute bottom-2 right-2 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md flex items-center cursor-pointer">
 									{/* duration */}
@@ -100,7 +95,7 @@ function SearchResult() {
 								<div className="flex justify-between">
 									<div>
 										{/* title */}
-										<h2 className="text-2xl font-bold">
+										<h2 className="text-2xl font-bold truncate max-w-[75vw] lg:max-w-lg lg:min-w-sm">
 											{first_track_data[0]?.name}
 										</h2>
 										{/* artist */}

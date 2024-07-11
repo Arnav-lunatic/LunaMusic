@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaDownload, FaStop, FaCheck } from "react-icons/fa6";
 import useDownloader from "react-use-downloader";
 
-function DownloadButtons({ tooltipPosition, fileToDownload, fileTitle }) {
+function DownloadButtons({ tooltipPosition='bottom', fileToDownload, fileTitle }) {
 	const { percentage, download, cancel, isInProgress } = useDownloader();
 
 	const [downloaded, setDownloaded] = useState(false);
