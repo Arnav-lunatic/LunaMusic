@@ -106,6 +106,7 @@ function App() {
 		<SearchContext.Provider
 			value={{
 				searchData,
+				setSearchData,
 				currentTrack,
 				setCurrentTrack,
 				pause,
@@ -129,7 +130,7 @@ function App() {
 				setDownloadQuality
 			}}
 		>
-			<NavBar sendValue={(searchData) => setSearchData(searchData)} />
+			<NavBar />
 			< SidebarMenu />
 			<Outlet />
 			<PlayBar />

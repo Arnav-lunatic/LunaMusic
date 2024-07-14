@@ -2,22 +2,25 @@ import React, { useEffect, useState } from "react";
 import { FaDownload, FaStop, FaCheck } from "react-icons/fa6";
 import useDownloader from "react-use-downloader";
 
-function DownloadButtons({ tooltipPosition='bottom', fileToDownload, fileTitle }) {
+function DownloadButtons({
+	tooltipPosition = "bottom",
+	fileToDownload,
+	fileTitle,
+}) {
 	const { percentage, download, cancel, isInProgress } = useDownloader();
 
 	const [downloaded, setDownloaded] = useState(false);
 
 	const handleDownloading = () => {
-		setDownloaded(false)
+		setDownloaded(false);
 		isInProgress ? cancel() : download(fileToDownload, fileTitle + ".mp3");
 	};
 
 	useEffect(() => {
-		if (percentage == '100') {
+		if (percentage == "100") {
 			setDownloaded(true);
 		}
-	}, [percentage])
-	
+	}, [percentage]);
 
 	return (
 		<button

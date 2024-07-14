@@ -65,7 +65,7 @@ const TrackDataCard = () => {
 				</div>
 				<button
 					onClick={() => add_to_save(currentTrack)}
-					className="absolute -top-12 right-0 flex items-center gap-1 mr-2 px-2 py-1 bg-black bg-opacity-80 hover:bg-zinc-900 p-1 rounded-md z-10"
+					className="absolute -top-12 right-0 flex items-center gap-1 mr-2 px-2 py-1 text-black bg-white bg-opacity-50 hover:bg-zinc-500 hover:bg-opacity-60 p-1 rounded-md z-10 transition-all"
 				>
 					<FaRegSave className="w-6 h-6" />
 					<h1 className="text-lg font-bold">Add to Save</h1>

@@ -15,7 +15,7 @@ function QueueCard() {
 						alt="thumbnail 50x50"
 					/>
 					<div>
-						<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-md">
+						<h1 className="text-lg font-semibold max-w-60 truncate lg:max-w-md xl:max-w-xl">
 							{trackName}
 						</h1>
 						<h1 className="text-sm max-w-60 truncate md:max-w-md">
@@ -41,7 +41,7 @@ function QueueCard() {
 					alt="thumbnail 50x50"
 				/>
 				<div>
-					<h1 className="text-lg font-semibold max-w-60 truncate md:max-w-md">
+					<h1 className="text-lg font-semibold max-w-60 truncate lg:max-w-md xl:max-w-xl">
 						{trackName}
 					</h1>
 					<h1 className="text-sm max-w-60 truncate md:max-w-md">

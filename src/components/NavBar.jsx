@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { SearchContext } from "../context/SearchContext";
 
-function NavBar({ sendValue }) {
+
+function NavBar() {
 	const [searchParams, setSearchParams] = useSearchParams()
-	const { setIsLoading, show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef } = useContext(SearchContext)
+	const { setIsLoading, show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef, setSearchData } = useContext(SearchContext)
 	const navigate = useNavigate()
 
 	const searchParamsValue = searchParams.get("v")
@@ -16,12 +17,12 @@ function NavBar({ sendValue }) {
 		fetch(`https://saavn.dev/api/search/songs?query=${getSearch}`)
 			.then((response) => response.json())
 			.then((data) => {
-				sendValue(data)
+				setSearchData(data)
 				setIsLoading(false)
 			})
 	};
 
-	const handleClick = () => {
+	const handleSearchButtonClick = () => {
 		if (searchValue) {
 			setSearchParams({v: searchValue})
 			search(searchValue);
@@ -33,7 +34,7 @@ function NavBar({ sendValue }) {
 	}
 
 	useEffect(() => {
-		handleClick()
+		handleSearchButtonClick()
 	}, []);
 
 	const handle_sidebar_menu = () => {
@@ -60,7 +61,7 @@ function NavBar({ sendValue }) {
 					onKeyPress={(e) => {
 						if (e.key === "Enter") {
 							navigate(`/search?v=${searchParamsValue}`)
-							handleClick();
+							handleSearchButtonClick();
 						}
 					}}
 					className="p-2 w-screen max-w-64 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
@@ -72,7 +73,7 @@ function NavBar({ sendValue }) {
 						data-tooltip-content="Search"
 						data-tooltip-place="bottom"
 						data-tooltip-delay-show="700"
-						onClick={handleClick}
+						onClick={handleSearchButtonClick}
 						className=" bg-zinc-950 rounded-r-lg bg-opacity-40"
 					>
 						<svg
