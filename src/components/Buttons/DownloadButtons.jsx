@@ -29,7 +29,7 @@ function DownloadButtons({
 			data-tooltip-content="Download"
 			data-tooltip-place={tooltipPosition}
 			data-tooltip-delay-show="700"
-			className="relative ml-4 w-10 h-10 text-white"
+			className="relative ml-4 w-10 h-10 text-white z-10"
 			onClick={handleDownloading}
 		>
 			{downloaded ? (
@@ -43,7 +43,7 @@ function DownloadButtons({
 			<div
 				className="absolute w-full h-full bg-white top-0 left-0 -z-10 rounded-full"
 				style={{
-					background: `conic-gradient(#9233ea ${
+					backgroundImage: `conic-gradient(#9233ea ${
 						3.6 * percentage
 					}deg, white 0deg)`,
 				}}

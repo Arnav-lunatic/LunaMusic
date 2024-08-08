@@ -4,7 +4,6 @@ const QualitySelector = ({title, quality, setQuality}) => {
 
 	const handleSelectChange = (event) => {
 		setQuality(Number(event.target.value))
-		console.log(title, event.target.value);
 	};
 	return (
 		<div className="flex flex-col md:flex-row md:gap-2 items-center p-4">

@@ -1,14 +1,17 @@
 import React, { useContext, useState } from "react";
 import { SearchContext } from "../context/SearchContext";
-import ReactLoading from "react-loading";
 import SongSearch from "./SearchPages/SongSearch";
+import { useNavigate } from "react-router-dom";
+import ArtistSearch from "./SearchPages/ArtistSearch";
 
-function SearchResult() {
-	const { isLoading } = useContext(SearchContext);
-	const [getSongs, setGetSongs] = useState(true);
-	const [getAlbums, setGetAlbums] = useState(false);
-	const [getArtists, setGetArtists] = useState(false);
-	const [getPlaylists, setGetPlaylists] = useState(false);
+function SearchResult({ whichPage }) {
+	const { searchParams } = useContext(SearchContext);
+	const getSongs = whichPage === "songs";
+	const getAlbums = whichPage === "albums";
+	const getArtists = whichPage === "artists"
+	const getPlaylists = whichPage === "playlists";
+
+	const navigate = useNavigate();
 
 	return (
 		<div className="pt-20 pb-28">
@@ -16,10 +19,8 @@ function SearchResult() {
 				<button
 					className="cursor-pointer w-[80px] lg:w-[110px] md:px-8 px-4 py-2 rounded-full"
 					onClick={() => {
-						setGetSongs(true);
-						setGetAlbums(false);
-						setGetArtists(false);
-						setGetPlaylists(false);
+						navigate(`/search/songs?${searchParams}`);
+
 					}}
 				>
 					Songs
@@ -27,10 +28,7 @@ function SearchResult() {
 				<button
 					className="cursor-pointer w-[80px] lg:w-[110px] md:px-8 px-4 py-2 rounded-full"
 					onClick={() => {
-						setGetSongs(false);
-						setGetAlbums(true);
-						setGetArtists(false);
-						setGetPlaylists(false);
+						navigate(`/search/albums?${searchParams}`);
 					}}
 				>
 					Albums
@@ -38,10 +36,7 @@ function SearchResult() {
 				<button
 					className="cursor-pointer w-[80px] lg:w-[110px] md:px-8 px-4 py-2 rounded-full"
 					onClick={() => {
-						setGetSongs(false);
-						setGetAlbums(false);
-						setGetArtists(true);
-						setGetPlaylists(false);
+						navigate(`/search/artists?${searchParams}`);
 					}}
 				>
 					Artists
@@ -49,10 +44,7 @@ function SearchResult() {
 				<button
 					className="cursor-pointer w-[80px] lg:w-[110px] md:px-8 px-4 py-2 rounded-full "
 					onClick={() => {
-						setGetSongs(false);
-						setGetAlbums(false);
-						setGetArtists(false);
-						setGetPlaylists(true);
+						navigate(`/search/playlists?${searchParams}`);
 					}}
 				>
 					Playlists
@@ -65,20 +57,11 @@ function SearchResult() {
 					} ${getPlaylists ? "left-[300px] lg:left-[450px]" : ""}`}
 				></div>
 			</div>
-			{isLoading ? (
-				<div className="absolute left-1/2 top-1/2 -translate-x-1/2	-translate-y-1/2">
-					<ReactLoading
-						type="bars"
-						color="#9233EA"
-						height={100}
-						width={100}
-					/>
-				</div>
-			) : getSongs ? (<SongSearch />) : "" ||
-				getAlbums ? (<h1 className="text-center font-extrabold text-5xl">Coming soon</h1>) : "" ||
-				getArtists ? (<h1 className="text-center font-extrabold text-5xl">Coming soon</h1>) : "" ||
-				getPlaylists ? (<h1 className="text-center font-extrabold text-5xl">Coming soon</h1>) : ""
-			}
+
+			{getSongs ? <SongSearch /> : ''}
+			{getAlbums ? <h1 className="text-center font-extrabold text-5xl">Coming soon</h1> : ""}
+			{getArtists ? <ArtistSearch/> : ""}
+			{getPlaylists ? <h1 className="text-center font-extrabold text-5xl">Coming soon</h1> : ''}
 		</div>
 	);
 }

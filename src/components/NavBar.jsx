@@ -1,31 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SearchContext } from "../context/SearchContext";
 
 
 function NavBar() {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const { setIsLoading, show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef, setSearchData } = useContext(SearchContext)
+	const { show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef, setSearchParams, searchValue, setSearchValue, searchParams } = useContext(SearchContext)
 	const navigate = useNavigate()
-
-	const searchParamsValue = searchParams.get("v")
-	const [searchValue, setSearchValue] = useState(searchParamsValue || '')
-
-
-	const search = (getSearch) => {
-		setIsLoading(true)
-		fetch(`https://saavn.dev/api/search/songs?query=${getSearch}`)
-			.then((response) => response.json())
-			.then((data) => {
-				setSearchData(data)
-				setIsLoading(false)
-			})
-	};
 
 	const handleSearchButtonClick = () => {
 		if (searchValue) {
 			setSearchParams({v: searchValue})
-			search(searchValue);
 		}
 	};
 
@@ -60,14 +44,14 @@ function NavBar() {
 					onChange={handleChange}
 					onKeyPress={(e) => {
 						if (e.key === "Enter") {
-							navigate(`/search?v=${searchParamsValue}`)
+							navigate(`/search/songs?v=${searchParams.get('v')}`)
 							handleSearchButtonClick();
 						}
 					}}
 					className="p-2 w-screen max-w-64 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
 				/>
 
-				<Link to={`/search?v=${searchParamsValue}`} className="flex items-center ">
+				<Link to={`/search/songs?v=${searchParams.get('v')}`} className="flex items-center ">
 					<button
 						data-tooltip-id="my-tooltip"
 						data-tooltip-content="Search"

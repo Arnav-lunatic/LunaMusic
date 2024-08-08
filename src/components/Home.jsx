@@ -1,21 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import savedPlaylistIcon from "/src/assets/saved.png"
+import { FaArrowRight } from "react-icons/fa";
+import SongSuggestion from "./SongSuggestion";
+
 
 function Home() {
 
 	return (
 		<div className="py-20 max-w-6xl m-auto">
 			<Link to='/playlist/saved-music'>
-				<div
-					className="grid justify-items-center hover:bg-black w-fit hover:bg-opacity-30 px-4 py-2 rounded-lg bg-red">
-					<img src={savedPlaylistIcon} />
-					<p className="font-semibold">Saved Playlist</p>
+				<div className="flex gap-3 justify-center items-center text-3xl bg-black bg-opacity-50 backdrop-blur-lg p-4 rounded-xl mx-4 mb-10">
+					<span>Basic Luna music</span>
+					<FaArrowRight/>
 				</div>
 			</Link>
 
+			<SongSuggestion/>
+
 			{/* Remove it later */}
-			<div className="absolute top-1/2 left-1/2 max-w-md opacity-35 -translate-x-1/2 -translate-y-1/2 grid gap-4	 text-center align-middle content-center -z-10">
+			{/* <div className="absolute top-1/2 left-1/2 max-w-md opacity-85 -translate-x-1/2 -translate-y-1/2 grid gap-4	 text-center align-middle content-center -z-10">
 				<h1 className="text-center text-3xl font-bold">
 					More Features Coming soon
 				</h1>
@@ -27,7 +30,7 @@ function Home() {
 					working on improvements and will address any issues in
 					future updates.
 				</h1>
-			</div>
+			</div> */}
 		</div>
 	);
 }

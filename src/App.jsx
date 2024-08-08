@@ -6,10 +6,10 @@ import { Tooltip } from "react-tooltip";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { default_thumbnail_50x50, default_thumbnail_500x500, defaultTrackPath, bg } from "./components";
+import { useSearchParams } from "react-router-dom";
 
 
 function App() {
-	const [searchData, setSearchData] = useState([]);
 	const [currentTrack, setCurrentTrack] = useState({
 		path: defaultTrackPath,
 		downloadPath: defaultTrackPath,
@@ -21,6 +21,10 @@ function App() {
 		year: 2024,
 		duration: 0,
 	});
+
+	// search value
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchValue, setSearchValue] = useState(searchParams.get("v") || '')
 
 	const storedQueue = JSON.parse(localStorage.getItem("queue"));
 	const [queue, setQueue] = useState(storedQueue ? storedQueue : []);
@@ -48,7 +52,7 @@ function App() {
 		localStorage.setItem("bgImage", bgImage)
 	}, [queue, savedPlaylist, playingQuality, downloadQuality, bgImage]);
 
-	const [isLoading, setIsLoading] = useState(true);
+	
 
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
@@ -105,8 +109,6 @@ function App() {
 	return (
 		<SearchContext.Provider
 			value={{
-				searchData,
-				setSearchData,
 				currentTrack,
 				setCurrentTrack,
 				pause,
@@ -114,12 +116,14 @@ function App() {
 				audioRef,
 				convertIntoMin,
 				progressBarRef,
+				searchValue,
+				setSearchValue,	
+				searchParams,
+				setSearchParams,					
 				queue,
 				setQueue,
 				savedPlaylist,
 				setSavedPlaylist,
-				isLoading,
-				setIsLoading,
 				show_sidebar_menu,
 				setShow_sidebar_menu,
 				sideBarButtonRef,
@@ -127,13 +131,14 @@ function App() {
 				playingQuality,
 				setPlayingQuality,
 				downloadQuality,
-				setDownloadQuality
+				setDownloadQuality,
 			}}
 		>
 			<NavBar />
 			< SidebarMenu />
 			<Outlet />
 			<PlayBar />
+
 			<Analytics />
 			<SpeedInsights />
 			<Tooltip
@@ -145,6 +150,7 @@ function App() {
 					padding: "4px 6px",
 				}}
 			/>
+
 		</SearchContext.Provider>
 	);
 }
