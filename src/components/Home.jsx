@@ -7,9 +7,9 @@ import SongSuggestion from "./SongSuggestion";
 function Home() {
 
 	return (
-		<div className="py-20 max-w-6xl m-auto">
+		<div className="pt-20 pb-24 max-w-6xl m-auto">
 			<Link to='/playlist/saved-music'>
-				<div className="flex gap-3 justify-center items-center text-3xl bg-black bg-opacity-50 backdrop-blur-lg p-4 rounded-xl mx-4 mb-10">
+				<div className="flex gap-3 w-full justify-center items-center text-3xl bg-black bg-opacity-50 backdrop-blur-lg p-4 rounded-xl mx-4 mb-4 hover:scale-105 transition-all">
 					<span>Basic Luna music</span>
 					<FaArrowRight/>
 				</div>

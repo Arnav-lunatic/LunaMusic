@@ -61,6 +61,39 @@ function App() {
 
 	const [show_sidebar_menu, setShow_sidebar_menu] = useState(false)
 
+	// Add to Queue Function
+	const add_to_queue = (newItem) => {
+		const newItemObj = {
+			id: newItem.id,
+			path: newItem.downloadUrl[playingQuality].url,
+			downloadPath: newItem.downloadUrl[downloadQuality].url,
+			name: newItem.name,
+			thumbnail_50x50: newItem.image[1].url,
+			thumbnail_500x500: newItem.image[2].url,
+			artist: newItem.artists.primary[0].name,
+			year: newItem.year,
+			duration: newItem.duration,
+		};
+		setQueue((queue) => [...queue, newItemObj]);
+		queue.length === 0 ? setCurrentTrack(newItemObj) : "";
+	};
+
+	// Add to Save Function
+	const add_to_save = (newItem) => {
+		const newItemObj = {
+			id: newItem.id,
+			path: newItem.downloadUrl[playingQuality].url,
+			downloadPath: newItem.downloadUrl[downloadQuality].url,
+			name: newItem.name,
+			thumbnail_50x50: newItem.image[1].url,
+			thumbnail_500x500: newItem.image[2].url,
+			artist: newItem.artists.primary[0].name,
+			year: newItem.year,
+			duration: newItem.duration,
+		};
+		setSavedPlaylist((queue) => [...queue, newItemObj]);
+	};
+
 	// API provides playCount in sec, this function will convert it mins i.e. ex- 03:09
 	const convertIntoMin = (sec) => {
 		return `${
@@ -132,6 +165,8 @@ function App() {
 				setPlayingQuality,
 				downloadQuality,
 				setDownloadQuality,
+				add_to_save,
+				add_to_queue,
 			}}
 		>
 			<NavBar />

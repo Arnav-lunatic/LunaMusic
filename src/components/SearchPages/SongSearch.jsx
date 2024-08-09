@@ -15,12 +15,9 @@ function SongSearch() {
 		searchValue,
 		searchParams,
 		convertIntoMin,
-		setCurrentTrack,
-		queue,
-		setQueue,
-		playingQuality,
 		downloadQuality,
-		setSavedPlaylist,
+		add_to_queue,
+		add_to_save
 	} = useContext(SearchContext);
 
 	const [searchData, setSearchData] = useState([]);
@@ -51,37 +48,6 @@ function SongSearch() {
 				</span>
 			);
 		});
-	};
-
-	const add_to_queue = (newItem) => {
-		const newItemObj = {
-			id: newItem.id,
-			path: newItem.downloadUrl[playingQuality].url,
-			downloadPath: newItem.downloadUrl[downloadQuality].url,
-			name: newItem.name,
-			thumbnail_50x50: newItem.image[1].url,
-			thumbnail_500x500: newItem.image[2].url,
-			artist: newItem.artists.primary[0].name,
-			year: newItem.year,
-			duration: newItem.duration,
-		};
-		setQueue((queue) => [...queue, newItemObj]);
-		queue.length === 0 ? setCurrentTrack(newItemObj) : "";
-	};
-
-	const add_to_save = (newItem) => {
-		const newItemObj = {
-			id: newItem.id,
-			path: newItem.downloadUrl[playingQuality].url,
-			downloadPath: newItem.downloadUrl[downloadQuality].url,
-			name: newItem.name,
-			thumbnail_50x50: newItem.image[1].url,
-			thumbnail_500x500: newItem.image[2].url,
-			artist: newItem.artists.primary[0].name,
-			year: newItem.year,
-			duration: newItem.duration,
-		};
-		setSavedPlaylist((queue) => [...queue, newItemObj]);
 	};
 
 	return (
