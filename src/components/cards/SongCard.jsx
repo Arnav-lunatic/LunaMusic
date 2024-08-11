@@ -1,20 +1,17 @@
 import React, { useContext } from "react";
-import DownloadButtons from "./Buttons/DownloadButtons";
-import PlayButtons from "./Buttons/PlayButtons";
-import { FaRegSave } from "react-icons/fa";
-import { PiQueueBold } from "react-icons/pi";
-import { SearchContext } from "../context/SearchContext";
+import DownloadButtons from "../Buttons/DownloadButtons";
+import PlayButtons from "../Buttons/PlayButtons";
+import AddToButton from "../Buttons/AddToButton";
+import { SearchContext } from "../../context/SearchContext";
 
 const SongCard = ({
-	track_data,
-	add_to_queue,
-	add_to_save
+	track_data
 }) => {
 	const {convertIntoMin, playingQuality, downloadQuality,} = useContext(SearchContext)
 	const playCount = track_data?.playCount !== null ? track_data?.playCount.toLocaleString() : ""
 
 	return (
-		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white p-4 rounded-lg shadow-lg w-full xl:max-w-2xl">
+		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg w-full xl:max-w-2xl">
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
@@ -53,24 +50,7 @@ const SongCard = ({
 				</div>
 			</div>
 
-			<div className="flex font-semibold items-center text-sm md:text-lg">
-				<button
-					onClick={() => add_to_save(track_data)}
-					className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md">
-					<FaRegSave className="h-5 w-5" />
-					<p>
-						Add to Save
-					</p>
-				</button>
-				<div className="font-extralight text-xl md:text-3xl">|</div>
-				<button
-					className="flex gap-2 justify-center items-center w-1/2 text-center hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
-					onClick={() => add_to_queue(track_data)}
-				>
-					<PiQueueBold className="h-6 w-6"/>
-					Add to Queue
-				</button>
-			</div>
+			<AddToButton data={track_data}/>
 		</div>
 	);
 };

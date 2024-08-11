@@ -26,7 +26,7 @@ function NavBar() {
 	} 
 
 	return (
-		<div className="absolute m-auto top-1 right-1 left-1 md:right-4 md:left-4 flex justify-between pr-1 pl-2 md:pr-4 md:pl-4 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg">
+		<div className="fixed m-auto top-1 right-1 left-1 md:right-4 md:left-4 flex justify-between pr-1 pl-2 md:pr-4 md:pl-4 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg z-50">
 			<button
 				ref={sideBarButtonRef}
 				className="flex flex-col gap-[7px] justify-center"

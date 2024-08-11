@@ -61,7 +61,7 @@ function SearchResult({ whichPage }) {
 			{getSongs ? <SongSearch /> : ''}
 			{getAlbums ? <h1 className="text-center font-extrabold text-5xl">Coming soon</h1> : ""}
 			{getArtists ? <ArtistSearch/> : ""}
-			{getPlaylists ? <h1 className="text-center font-extrabold text-5xl">Coming soon</h1> : ''}
+			{getPlaylists ? <h1 className="text-center font-extrabold text-5xl">Coming soon		</h1> : ''}
 		</div>
 	);
 }

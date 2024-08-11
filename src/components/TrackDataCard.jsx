@@ -23,6 +23,7 @@ const TrackDataCard = () => {
 
 	return (
 		<div className="relative w-full">
+			{/* Volume */}
 			<input
 				type="range"
 				min="0"

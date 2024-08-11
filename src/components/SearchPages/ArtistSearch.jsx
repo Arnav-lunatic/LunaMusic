@@ -1,38 +1,22 @@
-import React, { useState ,useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import ReactLoading from "react-loading";
-import { useNavigate } from "react-router-dom";
 
-function ArtistSearch() {
-	const { searchValue, searchParams, setSearchParams } = useContext(SearchContext);
-
-	const navigate = useNavigate()
+function ArtistSongsSearch() {
+	const { searchValue, searchParams, setSearchParams } =
+		useContext(SearchContext);
 
 	const [searchData, setSearchData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	console.log(searchParams.get('id'));	
 	const getArtistSongs = (artistIdVal) => {
-		console.log(searchParams.get('v'));
-		console.log(searchParams);
-		setSearchParams({ id: artistIdVal })
-	}
+		setSearchParams({ id: artistIdVal });
+	};
 
-    const ArtistCard = ({artistImg, artistName, artistIdVal}) => {
-		return (
-			<Link
-				to={`/artist?id=${artistIdVal}`}
-				onClick={() => getArtistSongs(artistIdVal)}
-				className="bg-black rounded-md p-4 bg-opacity-40 backdrop-blur-lg hover:scale-105 transition-all max-w-80 m-auto">
-				<img
-					className="rounded-md"
-					src={artistImg} alt="Artist Image" />
-				<div className="text-2xl font-bold text-center h-16 m-auto">{artistName}</div>
-            </Link>
-        )
-    }
-	
+	useEffect(() => {
+		setSearchParams({ v: searchValue });
+	}, []);
 
 	const search = (getSearch) => {
 		setIsLoading(true);
@@ -48,6 +32,29 @@ function ArtistSearch() {
 		search(searchValue);
 	}, [searchParams]);
 
+	const ArtistCard = ({ artistImg500x500, artistImg50x50, artistName, artistIdVal }) => {
+		return (
+			<Link
+				to={{
+					pathname: `/artist`,
+					search: `?id=${artistIdVal}`,
+				}}
+				state={{ currentArtistName: artistName, currentArtistImg: artistImg50x50 }}
+				onClick={() => getArtistSongs(artistIdVal)}
+				className="bg-black rounded-md p-4 bg-opacity-40 backdrop-blur-lg hover:scale-105 transition-all max-w-80 m-auto"
+			>
+				<img
+					className="rounded-md"
+					src={artistImg500x500}
+					alt="Artist Image"
+				/>
+				<div className="text-2xl font-bold text-center h-16 m-auto overflow-hidden text-ellipsis line-clamp-2">
+					{artistName}
+				</div>
+			</Link>
+		);
+	};
+
 	return (
 		<div className="max-w-7xl m-auto px-8 py-2">
 			{isLoading ? (
@@ -60,11 +67,19 @@ function ArtistSearch() {
 					/>
 				</div>
 			) : searchData?.success ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 m-auto">
-                        {searchData?.data.results.map((eachArtist, index) => {
-                            return <ArtistCard key={index} artistImg={eachArtist.image[2].url} artistName={eachArtist.name} artistIdVal={eachArtist.id} />
-                        })}
-                    </div>
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 m-auto">
+					{searchData?.data.results.map((eachArtist, index) => {
+						return (
+							<ArtistCard
+								key={index}
+								artistImg50x50={eachArtist.image[0].url}
+								artistImg500x500={eachArtist.image[2].url}
+								artistName={eachArtist.name}
+								artistIdVal={eachArtist.id}
+							/>
+						);
+					})}
+				</div>
 			) : (
 				""
 			)}
@@ -72,4 +87,4 @@ function ArtistSearch() {
 	);
 }
 
-export default ArtistSearch;
+export default ArtistSongsSearch;
