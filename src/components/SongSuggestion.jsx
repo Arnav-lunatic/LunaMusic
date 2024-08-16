@@ -29,7 +29,7 @@ function SongSuggestion() {
 
 	const SongCard = ({ data }) => {
 		return (
-			<div className="relative m-auto cursor-pointer hover:scale-105 transition-all rounded-lg bg-black bg-opacity-50 backdrop-blur-lg">
+			<div className="relative m-auto cursor-pointer hover:scale-105 transition-all rounded-lg bg-black bg-opacity-50 backdrop-blur-lg mx-2">
 				<div className="absolute flex gap-2 p-2 bottom-24 right-0">
 					<div>
 						<DownloadButtons
@@ -43,9 +43,9 @@ function SongSuggestion() {
 					<PlayButtons getTrackData={data} />
 				</div>
 
-				<img className="w-96 rounded-lg" src={data.image[2].url} />
+				<img className="w-full rounded-t-lg" src={data.image[2].url} />
 
-				<h1 className="text-2xl font-bold text-center p-4 w-96 truncate">
+				<h1 className="text-2xl font-bold text-center p-4 w-80 md:w-96 truncate">
 					{data.name}
 				</h1>
 

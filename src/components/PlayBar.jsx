@@ -134,7 +134,7 @@ const PlayBar = () => {
 
 	return (
 		<div
-			className={`fixed rounded-xl duration-500 transition-all bottom-0 left-0 w-full z-30
+			className={`fixed rounded-xl duration-500 transition-all bottom-0 left-0 w-full z-50
 				${isFullscreen ? "h-full bg-black bg-opacity-40 backdrop-blur-lg" : "h-4"}`}
 		>
 			{isFullscreen && (
