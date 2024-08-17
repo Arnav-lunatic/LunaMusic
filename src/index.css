@@ -22,14 +22,19 @@
 
 ::-webkit-scrollbar {
 	height: 8px;
-	width: 6px;
+	width: 0px;
 }
 
-
+@media (min-width: 500px) {
+    ::-webkit-scrollbar {
+		height: 8px;
+		width: 6px;
+	}
+}
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 4px;
-	background: #747474d8;
+	background: #7d56c1ce;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -45,7 +50,6 @@ input[type="range"] {
 	outline: none;
 	/*  slider progress trick  */
 	overflow: hidden;
-
 }
 
 /* Track: webkit browsers */

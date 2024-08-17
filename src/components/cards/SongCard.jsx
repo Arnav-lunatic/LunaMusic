@@ -11,7 +11,7 @@ const SongCard = ({
 	const playCount = track_data?.playCount !== null ? track_data?.playCount.toLocaleString() : ""
 
 	return (
-		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg w-full xl:max-w-2xl">
+		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-6 rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl">
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
@@ -24,7 +24,7 @@ const SongCard = ({
 					</div>
 				</div>
 				<div className="ml-4 flex-grow">
-					<h2 className="text-sm max-w-36 lg:max-w-56 xl:max-w-sm md:text-lg font-bold truncate">
+					<h2 className="text-sm w-36 lg:w-96 md:text-lg font-bold truncate">
 						{track_data?.name}
 					</h2>
 					<p className="text-gray-400 max-w-36 md:max-w-xs truncate">

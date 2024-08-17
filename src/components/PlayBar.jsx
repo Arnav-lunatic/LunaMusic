@@ -263,7 +263,7 @@ const PlayBar = () => {
 								<span className="text-sm max-w-48 lg:max-w-lg md:text-lg truncate font-semibold">
 									{currentTrack?.name}
 								</span>
-								<span className="text-xs w-48 md:text-sm">
+								<span className="text-xs w-48 md:text-sm truncate">
 									{currentTrack?.artist}
 								</span>
 								<span className="text-xs hidden md:inline-block">

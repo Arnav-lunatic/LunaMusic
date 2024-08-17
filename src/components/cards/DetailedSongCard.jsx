@@ -24,7 +24,7 @@ function DetailedSongCard({ first_track_data }) {
 				<img
 					src={first_track_data[0]?.image[2].url}
 					alt="Track thumbnail"
-					className="rounded-lg w-full min-w-48 min-h-48"
+					className="rounded-lg w-full max-w-80 lg:max-w-lg"
 				/>
 				<div className="absolute bottom-2 right-2 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md flex items-center cursor-pointer">
 					{/* duration */}
@@ -41,11 +41,11 @@ function DetailedSongCard({ first_track_data }) {
 				<div className="flex justify-between">
 					<div>
 						{/* title */}
-						<h2 className="text-2xl font-bold truncate max-w-[75vw] lg:max-w-sm lg:min-w-sm">
+						<h2 className="text-2xl font-bold truncate max-w-[75vw] lg:max-w-sm">
 							{first_track_data[0]?.name}
 						</h2>
 						{/* artist */}
-						<p className="text-gray-400">
+						<p className="text-gray-400  max-w-[75vw] lg:max-w-sm truncate">
 							<ArtistLabel
 								artists={first_track_data[0]?.artists.primary}
 							/>

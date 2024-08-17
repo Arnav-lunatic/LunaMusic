@@ -3,9 +3,8 @@ import ReactLoading from "react-loading";
 import DownloadButtons from "./Buttons/DownloadButtons";
 import PlayButtons from "./Buttons/PlayButtons";
 import { SearchContext } from "../context/SearchContext";
-import { FaRegSave } from "react-icons/fa";
-import { PiQueueBold } from "react-icons/pi";
 import AddToButton from "./Buttons/AddToButton";
+import PagesButton from "./Buttons/PagesButton";
 
 function SongSuggestion() {
 	const { downloadQuality} =
@@ -15,7 +14,7 @@ function SongSuggestion() {
 
 	const getSongSuggestion = () => {
 		setIsLoading(true);
-		fetch(`https://saavn.dev/api/songs/yDeAS8Eh/suggestions`)
+		fetch(`https://saavn.dev/api/songs/yDeAS8Eh/suggestions?page`)
 			.then((response) => response.json())
 			.then((data) => {
 				setIsLoading(false);

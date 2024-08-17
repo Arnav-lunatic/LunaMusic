@@ -26,6 +26,10 @@ function App() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [searchValue, setSearchValue] = useState(searchParams.get("v") || '')
 
+	// Paginations Vars
+	const [tracksPageParams, setTracksPageParams] = useSearchParams()
+	const [tracksPageNum, setTracksPageNum] = useState(tracksPageParams.get("page") || 1)
+
 	const storedQueue = JSON.parse(localStorage.getItem("queue"));
 	const [queue, setQueue] = useState(storedQueue ? storedQueue : []);
 
@@ -117,7 +121,11 @@ function App() {
 				searchValue,
 				setSearchValue,	
 				searchParams,
-				setSearchParams,					
+				setSearchParams,	
+				tracksPageNum,
+				setTracksPageNum,
+				tracksPageParams,
+				setTracksPageParams,
 				queue,
 				setQueue,
 				savedPlaylist,

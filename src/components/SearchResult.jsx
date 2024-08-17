@@ -15,7 +15,7 @@ function SearchResult({ whichPage }) {
 
 	return (
 		<div className="pt-20 pb-28">
-			<div className="relative flex items-center gap-[20px] lg:gap-[40px] h-8 w-min m-auto bg-black bg-opacity-40 backdrop-blur-lg rounded-full text-sm lg:text-md font-semibold shadow-sm shadow-zinc-800 mb-4	">
+			<div className="relative flex items-center gap-[20px] lg:gap-[40px] h-8 w-min m-auto bg-black bg-opacity-40 backdrop-blur-lg rounded-full text-sm lg:text-md font-semibold shadow-sm shadow-zinc-800 mb-4">
 				<button
 					className="cursor-pointer w-[80px] lg:w-[110px] md:px-8 px-4 py-2 rounded-full"
 					onClick={() => {
