@@ -41,7 +41,7 @@ function AddToButton({data}) {
 		<div className="flex font-semibold items-center text-sm md:text-md p-2">
 			<button
 				onClick={() => add_to_save(data)}
-				className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md"
+				className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 hover:bg-opacity-50 p-2 rounded-md"
 			>
 				<FaRegSave className="h-5 w-5" />
 				<p>Add to Save</p>
@@ -50,7 +50,7 @@ function AddToButton({data}) {
 			<div className="font-extralight text-xl md:text-3xl">|</div>
 
 			<button
-				className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 p-2 rounded-md border-zinc-600"
+				className="flex gap-2 justify-center items-center w-1/2 hover:bg-zinc-800 hover:bg-opacity-50 p-2 rounded-md border-zinc-600"
 				onClick={() => add_to_queue(data)}
 			>
 				<PiQueueBold className="h-6 w-6" />

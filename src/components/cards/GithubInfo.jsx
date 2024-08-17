@@ -40,7 +40,7 @@ function GithubInfo() {
 						</h1>
 					</Link>
 
-					<div className="grid justify-items-center gap-4 text-center flex-1 border rounded-b-lg lg:rounded-none lg:rounded-r-lg py-4">
+					<div className="grid justify-items-center gap-4 text-center flex-1 border-2 border-zinc-400 rounded-b-lg lg:rounded-none lg:rounded-r-lg py-4">
 						<h1 className="text-2xl lg:text-3xl font-bold w-full lg:w-4/5">
 							More Features Coming soon
 						</h1>

@@ -48,7 +48,7 @@ function NavBar() {
 							handleSearchButtonClick();
 						}
 					}}
-					className="p-2 w-screen max-w-64 rounded-l-lg text-lg font-semibold bg-opacity-50 backdrop-blur-lg md:max-w-2xl"
+					className="p-2 w-screen bg-zinc-800 max-w-64 rounded-l-lg text-lg font-semibold bg-opacity-50 md:max-w-2xl"
 				/>
 
 				<Link to={`/search/songs?v=${searchParams.get('v')}`} className="flex items-center ">
