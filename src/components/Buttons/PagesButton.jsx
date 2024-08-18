@@ -28,7 +28,7 @@ function PagesButton({ pageNum, setPageNum, linkTo }) {
     
 
 	return (
-		<div className="flex justify-between w-full max-w-sm lg:max-w-2xl text-xl bg-black bg-opacity-50 backdrop-blur-lg rounded-md mt-2 px-2 py-1 mx-auto lg:mx-0">
+		<div className="flex justify-between w-full max-w-sm lg:max-w-2xl text-xl bg-black bg-opacity-50 backdrop-blur-lg rounded-md mt-1 px-2 py-1 mx-auto lg:mx-0">
 			<button onClick={handlePrev} className="flex items-center">
 				<IoIosArrowBack /> Previous
             </button>

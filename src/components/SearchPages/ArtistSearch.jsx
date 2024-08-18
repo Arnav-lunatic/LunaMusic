@@ -72,10 +72,10 @@ function ArtistSongsSearch() {
 						return (
 							<ArtistCard
 								key={index}
-								artistImg50x50={eachArtist.image[0].url}
-								artistImg500x500={eachArtist.image[2].url}
-								artistName={eachArtist.name}
-								artistIdVal={eachArtist.id}
+								artistImg50x50={eachArtist?.image[0].url}
+								artistImg500x500={eachArtist?.image[2].url}
+								artistName={eachArtist?.name}
+								artistIdVal={eachArtist?.id}
 							/>
 						);
 					})}
