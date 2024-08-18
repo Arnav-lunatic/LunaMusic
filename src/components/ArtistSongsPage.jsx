@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import DisplayTracks from "./DisplayTracks";
+import ArtistInfoButton from "./Buttons/ArtistInfoButton";
 
 function ArtistSongPage() {
 	const [artistSongData, setArtistSongData] = useState([]);
@@ -16,9 +17,6 @@ function ArtistSongPage() {
 	// Get a query parameter
 	const location = useLocation();
 	const artistId = new URLSearchParams(location.search).get("id");
-
-	const artistName = useRef(location.state?.currentArtistName)
-	const artistImg = useRef(location.state?.currentArtistImg)
 
 	const searchArtistSongData = (artistId, pageNum) => {
 		setIsLoading(true);
@@ -42,18 +40,13 @@ function ArtistSongPage() {
 		<div className="h-[85dvh] mt-[70px]">
 			<div className="flex items-center text-3xl font-bold justify-between px-1 my-1 xl:px-20 ">
 				<div
-					onClick={() => navigate(`/search/artists?v=${artistName.current}`)}
+					onClick={() => navigate('/search/artists')}
 					className="bg-black bg-opacity-40 backdrop-blur-lg rounded-full"
 				>
 					<IoArrowBack className="w-12 h-12 cursor-pointer transition-all duration-500 hover:-translate-x-4" />
 				</div>
-				<div className="flex items-center gap-2 py-2 px-4 rounded-lg bg-black bg-opacity-40 backdrop-blur-lg">
-					<img
-						className="rounded-full w-12 h-12"
-						src={artistImg.current}
-					/>
-					<h1>{artistName.current}</h1>
-				</div>
+				
+				<ArtistInfoButton artistId={artistId} />
 			</div>
 			<DisplayTracks
 				isLoading={isLoading}

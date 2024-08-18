@@ -11,12 +11,11 @@ const SongCard = ({
 	const playCount = track_data?.playCount !== null ? track_data?.playCount.toLocaleString() : ""
 
 	return (
-		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-6 rounded-lg shadow-lg w-full max-w-sm lg:max-w-2xl">
+		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl">
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
 						src={track_data?.image[0].url}
-						alt="Song Art"
 						className="rounded-lg h-16 w-16"
 					/>
 					<div className="absolute bottom-1 right-1 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md text-xs">

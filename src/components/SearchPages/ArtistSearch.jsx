@@ -32,14 +32,13 @@ function ArtistSongsSearch() {
 		search(searchValue);
 	}, [searchParams]);
 
-	const ArtistCard = ({ artistImg500x500, artistImg50x50, artistName, artistIdVal }) => {
+	const ArtistCard = ({ artistImg500x500, artistName, artistIdVal }) => {
 		return (
 			<Link
 				to={{
 					pathname: `/artist`,
 					search: `?id=${artistIdVal}`,
 				}}
-				state={{ currentArtistName: artistName, currentArtistImg: artistImg50x50 }}
 				onClick={() => getArtistSongs(artistIdVal)}
 				className="bg-black rounded-md p-4 bg-opacity-40 backdrop-blur-lg hover:scale-105 transition-all max-w-80 m-auto"
 			>
@@ -71,8 +70,7 @@ function ArtistSongsSearch() {
 					{searchData?.data.results.map((eachArtist, index) => {
 						return (
 							<ArtistCard
-								key={index}
-								artistImg50x50={eachArtist?.image[0].url}
+								key={index}	
 								artistImg500x500={eachArtist?.image[2].url}
 								artistName={eachArtist?.name}
 								artistIdVal={eachArtist?.id}
