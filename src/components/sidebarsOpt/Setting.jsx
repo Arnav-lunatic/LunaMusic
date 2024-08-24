@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { bg, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13 } from ".";
-import { SearchContext } from "../context/SearchContext";
-import QualitySelector from "./QualitySelector";
+import { bg, bg2, bg3, bg4, bg5, bg6, bg7, bg8, bg9, bg10, bg11, bg12, bg13 } from ".."
+import { SearchContext } from "../../context/SearchContext";
+import QualitySelector from "../QualitySelector";
 
 function Setting() {
 	const {

@@ -5,16 +5,28 @@ import PlayButtons from "./Buttons/PlayButtons";
 import { SearchContext } from "../context/SearchContext";
 import AddToButton from "./Buttons/AddToButton";
 import PagesButton from "./Buttons/PagesButton";
+import LikeButton from "./Buttons/LikeButton";
 
 function SongSuggestion() {
-	const { downloadQuality} =
-		useContext(SearchContext);
+	const { downloadQuality, likedPlaylist} = useContext(SearchContext);
 	const [suggestionData, setSuggestionData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 
+	function getRandomNum(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	let randomNum = getRandomNum(0, likedPlaylist.length)
+
+
+	useEffect(() => {
+		randomNum = getRandomNum(0, likedPlaylist.length-1)
+	}, [likedPlaylist])
+	
+
 	const getSongSuggestion = () => {
 		setIsLoading(true);
-		fetch(`https://saavn.dev/api/songs/yDeAS8Eh/suggestions?page`)
+		fetch(`https://saavn.dev/api/songs/${likedPlaylist.length !== 0 ? likedPlaylist[randomNum].id : 'yDeAS8Eh'}/suggestions?page`)
 			.then((response) => response.json())
 			.then((data) => {
 				setIsLoading(false);
@@ -28,7 +40,8 @@ function SongSuggestion() {
 
 	const SongCard = ({ data }) => {
 		return (
-			<div className="relative m-auto cursor-pointer hover:scale-105 transition-all rounded-lg bg-black bg-opacity-50 backdrop-blur-lg mx-2">
+			<div className="relative m-auto transition-all rounded-lg bg-black bg-opacity-50 backdrop-blur-lg mx-2">
+				<LikeButton trackData={data} />
 				<div className="absolute flex gap-2 p-2 bottom-24 right-0">
 					<div>
 						<DownloadButtons
@@ -44,7 +57,7 @@ function SongSuggestion() {
 
 				<img className="w-full rounded-t-lg" src={data.image[2].url} />
 
-				<h1 className="text-2xl font-bold text-center p-4 w-80 md:w-96 truncate">
+				<h1 className="text-2xl font-bold text-center p-4 w-full truncate">
 					{data.name}
 				</h1>
 
@@ -55,6 +68,10 @@ function SongSuggestion() {
 
 	return (
 		<div>
+			<div className="flex gap-2 justify-center text-sm md:text-lg pb-4">
+				&#9432;
+				<h1>Your music feeds are influenced by the songs you like</h1>
+			</div>
 			{isLoading ? (
 				<div className="absolute left-1/2 top-1/2 -translate-x-1/2	-translate-y-1/2">
 					<ReactLoading

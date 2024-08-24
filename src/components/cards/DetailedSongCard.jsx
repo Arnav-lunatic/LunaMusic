@@ -1,14 +1,15 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import DownloadButtons from "../Buttons/DownloadButtons";
 import PlayButtons from "../Buttons/PlayButtons";
 import AddToButton from "../Buttons/AddToButton";
+import LikeButton from "../Buttons/LikeButton";
 
 function DetailedSongCard({ first_track_data }) {
     const { convertIntoMin, downloadQuality } = useContext(SearchContext);
     
-	const ArtistLabel = ({ artists = 'none' }) => {
+	const ArtistLabel = ({ artists = [] }) => {
 		return artists.map((eachArtist, index) => {
 			return (
 				<span key={index}>
@@ -16,10 +17,13 @@ function DetailedSongCard({ first_track_data }) {
 					{artists.length - 1 !== index ? ", " : ""}
 				</span>
 			);
-		});
+		})
 	};
+	
+
 	return (
 		<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg m-auto">
+			<LikeButton trackData={first_track_data[0]} positionClass="top-6 left-6" sizeClass="h-10 w-10"/>
 			<div className="relative w-full">
 				<img
 					src={first_track_data[0]?.image[2].url}

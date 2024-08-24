@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { SearchResult, Home, SavedMusicPage, Setting, ArtistSongsPage } from "./components";
+import { SearchResult, Home, SavedMusicPage, Setting, ArtistSongsPage, LikedMusicPage } from "./components";
 import {
 	Route,
 	RouterProvider,
@@ -20,7 +20,8 @@ const router = createBrowserRouter(
 			<Route path="/search/artists" element={<SearchResult whichPage={'artists'} />} />
 			<Route path="/search/playlists" element={<SearchResult whichPage={'playlists'} />} />
 			<Route path="/artist" element={<ArtistSongsPage/>} />
-			<Route path="/playlist/saved-music" element={<SavedMusicPage />} />
+			<Route path="/playlist/saved-tracks" element={<SavedMusicPage />} />
+			<Route path="/liked-tracks" element={<LikedMusicPage />} />
 			<Route path="/setting" element={<Setting />} />
 		</Route>
 	)

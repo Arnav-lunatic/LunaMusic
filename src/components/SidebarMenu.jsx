@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useEffect } from "react";
 import { GoHomeFill } from "react-icons/go";
 import { IoSettings, IoSave, IoArrowBack } from "react-icons/io5";
+import { FaHeart } from "react-icons/fa6";
 import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +14,7 @@ function SidebarMenu() {
 		return (
 			<div
 				onClick={clickEvent}
-				className=" flex justify-between items-center gap-4 w-full text-3xl font-bold cursor-pointer mt-6 hover:bg-zinc-700 p-2 rounded-lg"
+				className=" flex justify-between items-center gap-4 w-full text-2xl lg:text-3xl font-bold cursor-pointer mt-6 hover:bg-zinc-700 hover:bg-opacity-50 p-2 rounded-lg"
 			>
 				{icon}
 				<p>{text}</p>
@@ -44,46 +45,43 @@ function SidebarMenu() {
 		};
 	}, [show_sidebar_menu]);
 
+	const sideBarOptions = [
+		{ text: "Home", icon: <GoHomeFill />, navig: "/" },
+		{ text: "Saved Songs", icon: <IoSave />, navig: "/playlist/saved-tracks" },
+		{ text: "Liked Songs", icon: <FaHeart />, navig: "/liked-tracks" },
+		{ text: "Settings", icon: <IoSettings />, navig: "/setting" },
+	];
+
 	return (
 		<div
 			ref={sideBarRef}
-			className={`flex flex-col items-center px-4 absolute top-20 bottom-24 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg w-[90vw] max-w-72 transition-all duration-500 z-50 ${
+			className={`flex flex-col items-center px-4 fixed top-20 bottom-24 rounded-xl bg-black bg-opacity-40 backdrop-blur-lg w-[90vw] max-w-72 lg:max-w-80 transition-all duration-500 z-50 ${
 				show_sidebar_menu ? "left-4" : "-left-96"
 			}`}
 		>
 			<MenuButton
 				text={"Back"}
 				icon={<IoArrowBack />}
-                clickEvent={() => {
-                    setShow_sidebar_menu(false);
+				clickEvent={() => {
+					setShow_sidebar_menu(false);
 					navigate(-1);
 				}}
 			/>
 			<div className="w-full h-[1px] mt-2 bg-white"></div>
-			<MenuButton
-				text={"Home"}
-				icon={<GoHomeFill />}
-                clickEvent={() => {
-                    setShow_sidebar_menu(false);
-					navigate("/");
-				}}
-			/>
-			<MenuButton
-				text={"Saves"}
-				icon={<IoSave />}
-                clickEvent={() => {
-                    setShow_sidebar_menu(false);
-					navigate("/playlist/saved-music");
-				}}
-			/>
-			<MenuButton
-				text={"Settings"}
-				icon={<IoSettings />}
-                clickEvent={() => {
-                    setShow_sidebar_menu(false);
-					navigate("/setting");
-				}}
-			/>
+
+			{sideBarOptions.map((eachOpt, index) => {
+				return (
+					<MenuButton
+						key={index}
+						text={eachOpt.text}
+						icon={eachOpt.icon}
+						clickEvent={() => {
+							setShow_sidebar_menu(false);
+							navigate(eachOpt.navig);
+						}}
+					/>
+				);
+			})}
 		</div>
 	);
 }

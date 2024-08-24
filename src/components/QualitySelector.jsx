@@ -14,7 +14,7 @@ const QualitySelector = ({title, quality, setQuality}) => {
 				{title}
 			</label>
 			<select
-				id="download-quality"
+				// id="download-quality"
 				className="px-2 py-1 bg-zinc-800 rounded-md shadow-sm focus:outline-none"
 				value={quality}
 				onChange={handleSelectChange}

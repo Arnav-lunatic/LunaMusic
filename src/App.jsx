@@ -8,7 +8,6 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import { default_thumbnail_50x50, default_thumbnail_500x500, defaultTrackPath, bg } from "./components";
 import { useSearchParams } from "react-router-dom";
 
-
 function App() {
 	const [currentTrack, setCurrentTrack] = useState({
 		path: defaultTrackPath,
@@ -26,12 +25,18 @@ function App() {
 	const [searchParams, setSearchParams] = useSearchParams()
 	const [searchValue, setSearchValue] = useState(searchParams.get("v") || '')
 
+	// Queue
 	const storedQueue = JSON.parse(localStorage.getItem("queue"));
 	const [queue, setQueue] = useState(storedQueue ? storedQueue : []);
 
+	// Saved Playlist
 	const storedSavedPlaylist = JSON.parse(localStorage.getItem("savedPlaylist"));
 	const [savedPlaylist, setSavedPlaylist] = useState(storedSavedPlaylist ? storedSavedPlaylist : []);
 
+	// Liked Playlist
+	const storedLikedPlaylist = JSON.parse(localStorage.getItem("likedPlaylist"));	
+	const [likedPlaylist, setLikedPlaylist] = useState(storedLikedPlaylist ? storedLikedPlaylist : []);
+	
 	// Quality Selector
 	const storedPlayingQuality = localStorage.getItem("playingQuality")
 	const storedDownloadQuality = localStorage.getItem("downloadQuality")
@@ -47,10 +52,11 @@ function App() {
 	useEffect(() => {
 		localStorage.setItem("queue", JSON.stringify(queue));
 		localStorage.setItem("savedPlaylist", JSON.stringify(savedPlaylist));
+		localStorage.setItem("likedPlaylist", JSON.stringify(likedPlaylist));
 		localStorage.setItem("playingQuality", playingQuality)
 		localStorage.setItem("downloadQuality", downloadQuality)
 		localStorage.setItem("bgImage", bgImage)
-	}, [queue, savedPlaylist, playingQuality, downloadQuality, bgImage]);
+	}, [queue, savedPlaylist, likedPlaylist, playingQuality, downloadQuality, bgImage]);
 
 	const [pause, setPause] = useState(false);
 	const audioRef = useRef();
@@ -122,6 +128,8 @@ function App() {
 				setQueue,
 				savedPlaylist,
 				setSavedPlaylist,
+				likedPlaylist,
+				setLikedPlaylist,
 				show_sidebar_menu,
 				setShow_sidebar_menu,
 				sideBarButtonRef,

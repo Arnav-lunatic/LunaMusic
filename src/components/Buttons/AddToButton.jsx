@@ -35,7 +35,7 @@ function AddToButton({data}) {
 			year: newItem.year,
 			duration: newItem.duration,
 		};
-		setSavedPlaylist((queue) => [...queue, newItemObj]);
+		setSavedPlaylist((track) => [...track, newItemObj]);
 	};
 	return (
 		<div className="flex font-semibold items-center text-sm md:text-md p-2">
