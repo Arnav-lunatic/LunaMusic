@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from "react";
 import { GoHomeFill } from "react-icons/go";
 import { IoSettings, IoSave, IoArrowBack } from "react-icons/io5";
 import { FaHeart } from "react-icons/fa6";
+import { FaHistory } from "react-icons/fa";
 import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
@@ -49,6 +50,7 @@ function SidebarMenu() {
 		{ text: "Home", icon: <GoHomeFill />, navig: "/" },
 		{ text: "Saved Songs", icon: <IoSave />, navig: "/playlist/saved-tracks" },
 		{ text: "Liked Songs", icon: <FaHeart />, navig: "/liked-tracks" },
+		{ text: "History", icon: <FaHistory />, navig: "/history" },
 		{ text: "Settings", icon: <IoSettings />, navig: "/setting" },
 	];
 

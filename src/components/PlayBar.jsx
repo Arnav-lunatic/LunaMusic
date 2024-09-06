@@ -36,7 +36,7 @@ const PlayBar = () => {
 		progressBarRef,
 		convertIntoMin,
 		queue,
-		setQueue,
+		setQueue
 	} = useContext(SearchContext);
 
 	// requestAnimationFrame is often used within lifecycle methods or hooks like useEffect to manage animations or perform tasks that need to happen just before a repaint.

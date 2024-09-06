@@ -17,8 +17,8 @@ const SongCard = ({
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
-						src={track_data?.image[0].url}
-						className="rounded-lg h-16 w-16"
+						src={track_data?.image[1].url}
+						className="rounded-lg w-20"
 					/>
 					<div className="absolute bottom-1 right-1 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md text-xs">
 						{convertIntoMin(track_data?.duration)}
