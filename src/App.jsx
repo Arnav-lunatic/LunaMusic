@@ -102,6 +102,7 @@ function App() {
 		likedPlaylist,
 		playingQuality,
 		downloadQuality,
+		trackHistory,
 		bgImage,
 	]);
 

@@ -7,8 +7,7 @@ import { SearchContext } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
 function SidebarMenu() {
-	const { show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef } =
-		useContext(SearchContext);
+	const { show_sidebar_menu, setShow_sidebar_menu, sideBarButtonRef } = useContext(SearchContext);
 	const navigate = useNavigate();
 
 	const MenuButton = ({ text, icon, clickEvent }) => {

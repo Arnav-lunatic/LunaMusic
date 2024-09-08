@@ -6,8 +6,7 @@ function PlayButtons({
 	tooltipPosition='bottom',
 	getTrackData,
 }) {
-	const {setCurrentTrack, setPause, setQueue, playingQuality, downloadQuality } =
-		useContext(SearchContext);
+	const {setCurrentTrack, setPause, setQueue, playingQuality, downloadQuality } = useContext(SearchContext);
 
 	// When any play any particular track, this will set the track data in playBar
 	
@@ -24,7 +23,7 @@ function PlayButtons({
 			year: getTrackData.year,
 			duration: getTrackData.duration,
 		});
-		setQueue([{
+		setQueue((queue) => [{
 			id: getTrackData.id,
 			path: getTrackData?.downloadUrl[playingQuality].url,
 			downloadPath: getTrackData?.downloadUrl[downloadQuality].url,
@@ -34,7 +33,7 @@ function PlayButtons({
 			artist: getTrackData.artists.primary[0].name,
 			year: getTrackData.year,
 			duration: getTrackData.duration,
-		}])
+		}, ...queue])
 	};
 
 	return (

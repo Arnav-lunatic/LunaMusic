@@ -11,7 +11,6 @@ function PlaylistView({ playlist, setPlaylist, playlistTitle, textNote = '' }) {
 	useEffect(() => {
 		setSortedPlaylist(playlist)
 	}, [playlist])
-	
 
 	return (
 		<div className="absolute top-20 bottom-24 left-1/2 w-[95vw] max-w-6xl -translate-x-1/2 overflow-y-auto rounded-xl bg-black bg-opacity-40 backdrop-blur-lg p-2 md:p-6">

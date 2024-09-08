@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import DownloadButtons from "../Buttons/DownloadButtons";
 import PlayButtons from "../Buttons/PlayButtons";

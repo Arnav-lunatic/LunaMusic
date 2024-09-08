@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { SearchContext } from "../../context/SearchContext";
 import { FaRegSave } from "react-icons/fa";
-import { PiQueueBold } from "react-icons/pi";
+import { PiQueueBold } from "react-icons/pi";	
 
 function AddToButton({data}) {
 	const {queue, setQueue, setCurrentTrack, setSavedPlaylist, playingQuality, downloadQuality} = useContext(SearchContext)
