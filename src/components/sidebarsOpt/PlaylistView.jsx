@@ -3,6 +3,7 @@ import PlaylistThumbnail from "../PlaylistThumbnail";
 import PlayNShuffle from "../Buttons/PlayNShuffle";
 import SortingSearchBar from '../SortingSearchBar';
 import PlaylistSongCard from '../cards/PlaylistSongCard';
+import TrackCard from '../cards/TrackCard';
 
 function PlaylistView({ playlist, setPlaylist, playlistTitle, textNote = '' }) {
 
@@ -31,7 +32,11 @@ function PlaylistView({ playlist, setPlaylist, playlistTitle, textNote = '' }) {
             {textNote}
 
 			<div>
-				<PlaylistSongCard playlist={sortedPlaylist} setPlaylist={setPlaylist} />
+				{
+					sortedPlaylist.map((eachTrack, index) => {
+						return <TrackCard key={index} trackData={eachTrack} trackList={sortedPlaylist} setTrackList={setPlaylist} index={index}  />
+					})
+				}
 			</div>
 		</div>
 	);
