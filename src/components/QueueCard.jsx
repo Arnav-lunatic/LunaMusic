@@ -8,7 +8,8 @@ function QueueCard() {
 	const FirstQueueElem = ({ thumbnail_50x50, trackName, artist }) => {
 		return (
 			<div className="flex items-center w-full bg-zinc-400 bg-opacity-15 rounded-lg p-2 backdrop-blur-xl mb-4 shadow-sm shadow-gray-700">
-				<div className="flex items-center gap-4 justify-start w-full">
+				{
+					queue[0] ? <div className="flex items-center gap-4 justify-start w-full">
 					<img
 						className="h-16 w-16 rounded-lg"
 						src={thumbnail_50x50}
@@ -22,7 +23,8 @@ function QueueCard() {
 							{artist}
 						</h1>
 					</div>
-				</div>
+				</div> : <div className="text-x	l font-bold">Empty Queue</div>
+				}
 
 				
 			</div>
@@ -75,9 +77,9 @@ function QueueCard() {
 			) : (
 				<div>
 					<FirstQueueElem
-						thumbnail_50x50={queue[0].thumbnail_50x50}
-						trackName={queue[0].name}
-						artist={queue[0].artist}
+						thumbnail_50x50={queue[0]?.thumbnail_50x50}
+						trackName={queue[0]?.name}
+						artist={queue[0]?.artist}
 					/>
 				</div>
 			)}

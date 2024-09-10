@@ -22,7 +22,7 @@ const TrackDataCard = () => {
 	};
 
 	return (
-		<div className="relative w-full">
+		<div className="relative w-full max-w-xl">
 			{/* Volume */}
 			<input
 				type="range"
