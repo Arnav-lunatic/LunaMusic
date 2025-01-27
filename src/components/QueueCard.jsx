@@ -23,7 +23,7 @@ function QueueCard() {
 							{artist}
 						</h1>
 					</div>
-				</div> : <div className="text-x	l font-bold">Empty Queue</div>
+				</div> : <div className="text-xl font-bold">Empty Queue</div>
 				}
 
 				

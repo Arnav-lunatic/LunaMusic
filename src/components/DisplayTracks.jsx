@@ -42,7 +42,7 @@ function DisplayTracks({ isLoading, searchData, data, pageNum, setPageNum, linkT
 												other_track_data
 											) !== 0
 									)
-									.map((other_track_data) => {
+									.map((other_track_data) => {	
 										return (
 											<SongCard
 												track_data={other_track_data}
