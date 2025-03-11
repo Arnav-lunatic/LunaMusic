@@ -12,13 +12,13 @@ const SongCard = ({
 	const playCount = track_data?.playCount !== null ? track_data?.playCount.toLocaleString() : ""
 
 	return (
-		<div className="grid gap-4 max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl">
+		<div className="grid max-h-48 bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg w-full max-w-sm lg:max-w-3xl">
 			<LikeButton trackData={track_data} />
 			<div className=" flex items-center">
 				<div className="relative">
 					<img
 						src={track_data?.image[1].url}
-						className="rounded-lg w-20"
+						className="rounded-lg w-16"
 					/>
 					<div className="absolute bottom-1 right-1 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md text-xs">
 						{convertIntoMin(track_data?.duration)}

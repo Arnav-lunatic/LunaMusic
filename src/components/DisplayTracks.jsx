@@ -21,14 +21,14 @@ function DisplayTracks({ isLoading, searchData, data, pageNum, setPageNum, linkT
 				</div>
 			) : searchData?.success ? (
 				<div>
-					<div className="flex lg:flex-row flex-col gap-2 h-[70dvh] lg:overflow">
+					<div className="flex lg:flex-row flex-col gap-2 lg:overflow">
 						<div className="flex items-center w-full lg:w-1/2">
 							<DetailedSongCard
 								first_track_data={first_track_data}
 							/>
 						</div>
-						<div className="grid w-full lg:w-max pb-24">
-							<div className="grid gap-2 m-auto lg:m-0 h-auto lg:h-[70dvh] lg:overflow-y-auto">
+						<div className="grid w-full lg:w-max">
+							<div className="grid gap-2 m-auto lg:m-0 h-[70vh] lg:overflow-y-auto">
 								{/* 
 								It Render a list of all other sound track except first
 								1) Filter the first sound track

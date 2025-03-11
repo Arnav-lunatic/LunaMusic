@@ -37,7 +37,7 @@ function SongSearch() {
 	}, [tracksPageNum])
 	
 	return (
-		<>
+		<div>
 			<DisplayTracks
 				isLoading={isLoading}
 				searchData={searchData}
@@ -46,7 +46,7 @@ function SongSearch() {
 				setPageNum={setTracksPageNum}
 				linkTo={`/search/songs?v=${searchValue}&page=${tracksPageNum}`}
 			/>
-		</>
+		</div>
 	);
 }
 

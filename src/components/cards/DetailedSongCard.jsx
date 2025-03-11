@@ -24,11 +24,11 @@ function DetailedSongCard({ first_track_data }) {
 	return (
 		<div className="bg-black bg-opacity-40 backdrop-blur-lg text-white pt-4 px-4 rounded-lg shadow-lg m-auto">
 			<LikeButton trackData={first_track_data[0]} positionClass="top-6 left-6" sizeClass="h-10 w-10"/>
-			<div className="relative w-full">
+			<div className="relative">
 				<img
 					src={first_track_data[0]?.image[2].url}
 					alt="Track thumbnail"
-					className="rounded-lg w-full max-w-80 lg:max-w-lg"
+					className="rounded-lg w-full max-w-md"
 				/>
 				<div className="absolute bottom-2 right-2 bg-gray-900 bg-opacity-75 text-white p-1 rounded-md flex items-center cursor-pointer">
 					{/* duration */}

@@ -33,7 +33,7 @@ function PagesButton({ pageNum, setPageNum, linkTo }) {
 				<IoIosArrowBack /> Previous
             </button>
             
-            <div className="flex gap-4">
+            <div className="flex items-center gap-4">
                 {pageNum == 1 ? '' : <button onClick={handlePrevToFirst}>01 ...</button>}
                 
                 <h1
